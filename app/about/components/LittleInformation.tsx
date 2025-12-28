@@ -18,8 +18,12 @@ const LittleInformation = () => {
             </p>
           </div>
 
-          {/* cards  */}
-          <LittleCards />
+          <LittleCards
+            customersNumber={65}
+            foundedNumber={1995}
+            locationNumber={3}
+            staffNumber={100}
+          />
         </div>
         <div className="w-full md:w-[45%] ps-0 mt-5 md:mt-0 md:ps-5">
           <Image

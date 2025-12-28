@@ -1,3 +1,4 @@
+import HeadingWithTitle from "@/components/shared/HeadingWithTitle";
 import { Clock, Shell, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -35,15 +36,11 @@ const FastFood = () => {
             </div>
           </div>
           <div className=" flex flex-col items-center justify-center md:items-start md:justify-start gap-12">
-            <div className="flex flex-col gap-4">
-              <h2 className="text-[50px] font-playfair text-center md:text-start">
-                Fastest Food Delivery in City
-              </h2>
-              <p className="text-[12px] md:w-75">
-                Our visual designer lets you quickly and of drag a down your way
-                to customapps for both keep desktop.{" "}
-              </p>
-            </div>
+            <HeadingWithTitle
+              subTitle="                Our visual designer lets you quickly and of drag a down your way
+                to customapps for both keep desktop."
+              title="Fastest Food Delivery in City"
+            />
             <div className="flex flex-col items-start gap-4">
               <div className="flex items-center justify-center gap-4">
                 <div className="flex items-center justify-center w-8 h-8 bg-[#AD343E] rounded-full">

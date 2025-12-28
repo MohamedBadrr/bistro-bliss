@@ -29,6 +29,12 @@ const Navbar = () => {
     {
       id: crypto.randomUUID(),
       // title: translations.navbar.contact,
+      title: "blog",
+      href: Routes.BLOG,
+    },
+    {
+      id: crypto.randomUUID(),
+      // title: translations.navbar.contact,
       title: "login",
       href: `${Routes.AUTH}/${Pages.LOGIN}`,
     },
@@ -61,7 +67,7 @@ const Navbar = () => {
           <li key={link.id}>
             <Link
               onClick={() => setOpenMenu(false)}
-              href={`${link.href}`}
+              href={`/${link.href}`}
               className={`${
                 link.href === `${Routes.AUTH}/${Pages.LOGIN}`
                   ? `${buttonVariants({

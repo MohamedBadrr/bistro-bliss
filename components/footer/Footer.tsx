@@ -70,28 +70,28 @@ const Footer = () => {
               <Image
                 alt=""
                 src={"/assets/egg.png"}
-                className="rounded-lg hover:scale"
+                className="rounded-lg hover-scale"
                 width={194}
                 height={170}
               />
               <Image
                 alt=""
                 src={"/assets/newfries.png"}
-                className="rounded-lg hover:scale"
+                className="rounded-lg hover-scale"
                 width={194}
                 height={170}
               />
               <Image
                 alt=""
                 src={"/assets/goodfood.png"}
-                className="rounded-lg hover:scale"
+                className="rounded-lg hover-scale"
                 width={194}
                 height={170}
               />
               <Image
                 alt=""
                 src={"/assets/buncakes.png"}
-                className="rounded-lg hover:scale"
+                className="rounded-lg hover-scale"
                 width={194}
                 height={170}
               />
