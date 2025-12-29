@@ -1,0 +1,101 @@
+"use client";
+import InputField from "@/components/fields/InputField";
+import HeadingWithTitle from "@/components/shared/HeadingWithTitle";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { validationSchema } from "@/validations";
+import { Form, Formik } from "formik";
+
+const initialValues = {
+  email: "",
+  name: "",
+  subject: "",
+  message: "",
+};
+const ContactUs = () => {
+  const handleSubmit = (values: {
+    email: string;
+    name: string;
+    subject: string;
+    message: string;
+  }) => {
+    console.log(values);
+  };
+  return (
+    <div className="bg-neutral-50">
+      <div className="container flex flex-col items-center justify-center gap-15 py-15">
+        <HeadingWithTitle
+          title="Contact Us"
+          containerClassName="flex items-center"
+          subTitleClassName="text-neutra text-center text-[16px] w-1/2!"
+          subTitle="We consider all the drivers of change gives you the components you need to change to create a truly happens."
+        />
+
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+          validateOnMount={false}
+          validateOnBlur={true}
+        >
+          <Form className="w-full items-center justify-center flex ">
+            <div className="flex gap-10 items-center p-10 rounded-lg bg-white border border-neutral-200 justify-center max-w-179.25 w-full flex-col">
+              <div className="flex gap-6 w-full item-center ">
+                <InputField
+                  label="Name"
+                  name="name"
+                  placeholder="Enter your name"
+                />
+                <InputField
+                  label="Email"
+                  name="email"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <InputField
+                label="Subject"
+                name="subject"
+                placeholder="Write a subject"
+              />
+
+              <InputField
+                label="Message"
+                name="message"
+                placeholder="Write your message"
+                type="textarea"
+              />
+              <Button type="submit" className="w-full" variant={"default"}>
+                Send
+              </Button>
+            </div>
+          </Form>
+        </Formik>
+        <div className="w-full max-w-180 flex-col md:flex-row gap-10 md:gap-0 flex items-center justify-between">
+          <div className="space-y-4 w-full  md:max-w-45.5">
+            <h2 className="text-[20px]">Call Us:</h2>
+            <h2 className="text-[24px] text-primary">+1-234-567-8900</h2>
+          </div>
+
+          <div className="space-y-4 w-full md:max-w-33.5">
+            <h2 className="text-[20px]">Hours:</h2>
+            <div>
+              <p className="text-[14px]">Mon-Fri: 11am - 8pm</p>
+              <p className="text-[14px]">Sat, Sun: 9am - 10pm</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 w-full md:max-w-33.5">
+            <h2 className="text-[20px]">Our Location:</h2>
+            <p className="text-[14px] ">
+              123 Bridge Street Nowhere Land, LA 12345 United States
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ContactUs;

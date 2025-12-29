@@ -1,6 +1,6 @@
 import Link from "next/link";
 import BlogCard from "../_components/BlogCard";
-import { BLOGS } from "./constants";
+import { BLOGS } from "@/constants/blogs";
 
 const Page = () => {
   return (

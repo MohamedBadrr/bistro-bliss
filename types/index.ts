@@ -18,3 +18,10 @@ export type BlogPost = {
   sections: ContentSection[];
   tags?: string[];
 };
+
+export type ContactUsFormValues = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}

@@ -1,5 +1,5 @@
+import { BLOGS } from "@/constants/blogs";
 import Image from "next/image";
-import { BLOGS } from "../constants";
 
 interface props {
   params: Promise<{ id: string }>;

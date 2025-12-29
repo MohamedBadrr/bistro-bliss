@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -15,9 +16,11 @@ const Hero = () => {
           <Button variant={"default"} className="">
             Book a Table
           </Button>
-          <Button variant={"outline"} className="">
-            Explore Menu
-          </Button>
+          <Link href={"/menu"}>
+            <Button variant={"outline"} className="">
+              Explore Menu
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

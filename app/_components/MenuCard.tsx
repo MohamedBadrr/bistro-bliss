@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 type MenuCardProps = {
   title: string;
   description: string;
@@ -15,7 +16,9 @@ const MenuCard = ({ description, imageSrc, title }: MenuCardProps) => {
         <h3 className="font-semibold">{title}</h3>
         <p className="text-center text-[12px] opacity-75">{description}</p>
       </div>
-      <Button variant={"link"}>Explore Menu</Button>
+      <Link href={"/menu"}>
+        <Button variant={"link"}>Explore Menu</Button>
+      </Link>
     </div>
   );
 };
