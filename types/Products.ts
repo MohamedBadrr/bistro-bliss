@@ -1,6 +1,6 @@
 export interface ProductSize {
   id: string;
-  size: string;        // e.g., "SAMLL" (likely a typo for "SMALL"), "MEDIUM", "LARGE"
+  size: "SMALL" | "MEDIUM" | "LARGE";        // e.g., "SAMLL" (likely a typo for "SMALL"), "MEDIUM", "LARGE"
   price: number;
   product_id: string;
 }
@@ -21,5 +21,6 @@ export interface Product {
   created_at: string;  // ISO timestamp string
   product_sizes: ProductSize[];
   product_extras: ProductExtra[];
+  category_id: string,
 }
 

@@ -10,6 +10,7 @@
 
 import Link from "next/link";
 import Navbar from "./Navbar";
+import CartButton from "./CartButton";
 
 async function Header() {
   // const locale = await getCurrentLocale();
@@ -31,7 +32,7 @@ async function Header() {
             <LanguageSwitcher /> */}
         {/* </div> */}
 
-        {/* <CartButton /> */}
+        <CartButton />
         {/* </div> */}
       </div>
     </header>

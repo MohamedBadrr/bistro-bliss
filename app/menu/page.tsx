@@ -3,7 +3,6 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import MenuFilters from "./MenuFilters";
 import MenuItems from "./MenuItems";
 import OrderApps from "./OrderApps";
 import { QUERY_KEYS } from "@/constants/QueryKeies";
@@ -31,7 +30,6 @@ const Menu = async () => {
           </p>
           <div className="mt-3 space-y-20 mb-22">
             <HydrationBoundary state={dehydrate(queryClient)}>
-              <MenuFilters />
               <MenuItems />
             </HydrationBoundary>
             <OrderApps />

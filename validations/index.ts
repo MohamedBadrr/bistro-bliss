@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-export const validationSchema = Yup.object({
+export const ContactUsValidationSchema = Yup.object({
   email: Yup.string().email().required("Email is required"),
   name: Yup.string()
     .required("Name is required.")
@@ -12,3 +12,5 @@ export const validationSchema = Yup.object({
     .required("Message is required.")
     .min(3, "at least 3 characters."),
 });
+
+

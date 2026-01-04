@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { validationSchema } from "@/validations";
+import { ContactUsValidationSchema } from "@/validations";
 import { Form, Formik } from "formik";
 
 const initialValues = {
@@ -29,14 +29,14 @@ const ContactUs = () => {
         <HeadingWithTitle
           title="Contact Us"
           containerClassName="flex items-center"
-          subTitleClassName="text-neutra text-center text-[16px] w-1/2!"
+          subTitleClassName="text-neutral text-center text-[16px] w-1/2!"
           subTitle="We consider all the drivers of change gives you the components you need to change to create a truly happens."
         />
 
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
-          validationSchema={validationSchema}
+          validationSchema={ContactUsValidationSchema}
           validateOnMount={false}
           validateOnBlur={true}
         >

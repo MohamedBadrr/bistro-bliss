@@ -12,7 +12,7 @@ const MenuItem = (props: Product) => {
     >
       <Image
         alt="menu image"
-        src={props.image}
+        src={props.image ?? "/assets/placholderIamge.jpg"}
         className="w-full! h-66.5! md:h-56.5! rounded-t-lg"
         width={230}
         height={306}
@@ -26,13 +26,14 @@ const MenuItem = (props: Product) => {
         <AddToCardButton
           description={props.description}
           id={props.id}
-          image={props.image}
+          image={props.image ?? "/assets/placholderIamge.jpg"}
           price={props.price}
           name={props.name}
           key={props.id}
           created_at={props.created_at}
           product_extras={props.product_extras}
           product_sizes={props.product_sizes}
+          category_id={props.category_id}
         />
       </div>
     </div>

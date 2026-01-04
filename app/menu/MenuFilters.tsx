@@ -7,21 +7,20 @@ import { getCategories } from "@/services/categories/getCategories";
 import { QUERY_KEYS } from "@/constants/QueryKeies";
 import WithLoadingAndErrors from "@/HOCs/WithLoadingAndErrors";
 
-const MenuFilters = () => {
-  const [selectedFilter, setSelcetedFilters] = useState("All");
+const MenuFilters = ({ setFilter }: { setFilter: (value: string) => void }) => {
+  const [selectedFilter, setSelectedFilters] = useState("All");
   const { data, isLoading, isError } = useCustomQuery({
     queryFn: getCategories,
     queryKey: QUERY_KEYS.CATEGORIES,
   });
   console.log("data category", data);
 
-  // const {data} = use
   const handleClickFilter = (filter: string) => {
-    setSelcetedFilters(filter);
+    setSelectedFilters(filter);
   };
   return (
     <WithLoadingAndErrors
-      LoadingComponent={<>loading</>}
+      LoadingComponent={<></>}
       isError={isError}
       isLoading={isLoading}
       lengthOfData={data?.length as number}
@@ -30,7 +29,10 @@ const MenuFilters = () => {
       <div className="flex items-center justify-center flex-wrap gap-1 md:gap-5">
         <Button
           key={"All"}
-          onClick={() => handleClickFilter("All")}
+          onClick={() => {
+            handleClickFilter("All");
+            setFilter("");
+          }}
           variant={selectedFilter === "All" ? "default" : "outline"}
           className="my-2 md:my-0"
         >
@@ -39,7 +41,10 @@ const MenuFilters = () => {
         {data?.map((filter) => (
           <Button
             key={filter.id}
-            onClick={() => handleClickFilter(filter.name)}
+            onClick={() => {
+              handleClickFilter(filter.name);
+              setFilter(filter.id);
+            }}
             variant={selectedFilter === filter.name ? "default" : "outline"}
             className="my-2 md:my-0"
           >
