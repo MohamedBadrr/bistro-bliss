@@ -9,16 +9,17 @@ export type CartItem = {
   size?: ProductSize;
   extras?: ProductExtra[];
 };
+const initialCartItems = localStorage.getItem('cartItems');
 type Store = {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
   removeItemFromCart: (item: CartItem) => void;
   removeItemCart: (item: CartItem) => void;
-  clearCart: ()=>void
+  clearCart: () => void;
 };
 
 export const useCart = create<Store>()((set) => ({
-  cart: [],
+  cart: initialCartItems ? JSON.parse(initialCartItems) : [],
   addToCart: (item) => {
     set((state) => {
       const existingItem = state.cart.find(

@@ -32,7 +32,8 @@ async function Header() {
             <LanguageSwitcher /> */}
         {/* </div> */}
 
-        <CartButton />
+        <CartButton  />
+        
         {/* </div> */}
       </div>
     </header>
