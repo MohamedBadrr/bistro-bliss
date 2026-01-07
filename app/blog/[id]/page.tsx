@@ -9,7 +9,7 @@ const OneBlog = async ({ params }: props) => {
   console.log("params", id);
   const SelectedBLog = BLOGS.find((blog) => blog.id === id);
   return (
-    <div className="container pb-10">
+    <div className="container pt-10 pb-10">
       <div className="flex items-center justify-center flex-col gap-10">
         <h1 className="font-playfair text-[45px] text-center w-full pt-10 md:w-3/4 ">
           {SelectedBLog?.title}

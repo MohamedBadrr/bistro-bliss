@@ -20,6 +20,7 @@ const Events = () => {
                 width={206}
                 height={120}
                 content="all"
+                className="w-52.5! h-55! rounded-md!" 
               />
             </div>
             <div className="flex flex-col gap-4">

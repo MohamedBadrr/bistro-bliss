@@ -4,7 +4,7 @@ import CartItems from "./components/CartItems";
 const Page = () => {
   return (
     <main>
-      <section className="py-5 min-h-screen">
+      <section className="pt-25 pb-5 min-h-screen">
         <div className="container">
           <h2 className="text-[50px] text-primary mb-10 font-playfair text-center ">
             Shopping Cart

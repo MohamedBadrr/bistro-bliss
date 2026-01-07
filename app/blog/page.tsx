@@ -4,7 +4,7 @@ import { BLOGS } from "@/constants/blogs";
 
 const Page = () => {
   return (
-    <div className="container mt-10 md:mt-2">
+    <div className="container pt-20 mt-10 md:mt-2">
       <div className="flex flex-col gap-10 ">
         <div className="items-center flex flex-col justify-center gap-3">
           <h1 className="text-[55px] font-playfair text-center">

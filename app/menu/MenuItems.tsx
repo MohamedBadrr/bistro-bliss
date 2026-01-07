@@ -2,7 +2,7 @@
 import MenuItem from "./MenuItem";
 import { getProducts } from "@/services/products/getProducts";
 import { QUERY_KEYS } from "@/constants/QueryKeies";
-import { useCustomQuery } from "../hooks/useCustomQuery";
+import { useCustomQuery } from "../../hooks/useCustomQuery";
 import WithLoadingAndErrors from "@/HOCs/WithLoadingAndErrors";
 import MenuPageLoading from "@/skeletons/product/MenuPageLoading";
 import { useState } from "react";

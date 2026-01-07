@@ -1,0 +1,75 @@
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTrigger,
+} from "../ui/drawer";
+import { Menu } from "lucide-react";
+import { Button } from "../ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import Navbar from "./Navbar";
+
+const NavBarDrawer = () => {
+  return (
+    <Drawer direction="left">
+      <DrawerTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <Button className="lg:hidden " variant={"ghost"}>
+            <Menu className="h-8! w-8! mt-2" />
+          </Button>
+        </Button>
+      </DrawerTrigger>
+
+      <DrawerContent className="bg-white ">
+        <div className="mx-auto w-full max-w-md h-[100dvh] flex flex-col">
+          <DrawerHeader className="border-b border-primary">
+            <Link
+              href={`/`}
+              className="text-[#474747] flex items-center gap-2 justify-center italic font-playfair font-semibold text-2xl"
+            >
+              <Image
+                alt="logo image"
+                src={"/logo.svg"}
+                width={100}
+                height={100}
+                className="w-10.75! h-10.75! text-primary md:w-13.75! md:h-13.75!"
+              />
+              <p className="mt-2">Bistro Bliss</p>
+            </Link>
+          </DrawerHeader>
+
+          {/* Content */}
+          <div className="flex flex-col! overflow-y-auto p-4 ">
+            <Navbar />
+            <div className="flex items-center justify-center gap-2 absolute top-110!">
+              <Link href={"/auth/login"}>
+                <Button
+                  className="py-0!  text-[13px]! font-semibold font-playfair italic"
+                  variant={"default"}
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link href={"/auth/login"}>
+                <Button
+                  className="py-0!  text-[13px]! font-semibold font-playfair italic"
+                  variant={"outline"}
+                >
+                  Book A Table
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Footer */}
+          {/* <div className="border-t p-4">
+            <Button className="w-full rounded-full text-lg">Checkout</Button>
+          </div> */}
+        </div>
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
+export default NavBarDrawer;

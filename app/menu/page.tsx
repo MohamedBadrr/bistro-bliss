@@ -20,7 +20,7 @@ const Menu = async () => {
     queryFn: getCategories,
   });
   return (
-    <div className="bg-[url('/assets/bgMenu.jpg')] py-15! px-5 md:px-0! bg-cover bg-center bg-no-repeat">
+    <div className="bg-[url('/assets/bgMenu.jpg')] pt-25! pb-15! px-5 md:px-0! bg-cover bg-center bg-no-repeat">
       <div className="container bg-white shadow-[90px] py-10  rounded-lg">
         <div className="flex flex-col gap-10 ">
           <div className="items-center flex flex-col justify-center gap-3">

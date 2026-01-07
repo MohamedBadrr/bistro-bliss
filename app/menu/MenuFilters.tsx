@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useCustomQuery } from "../hooks/useCustomQuery";
+import { useCustomQuery } from "../../hooks/useCustomQuery";
 import { getCategories } from "@/services/categories/getCategories";
 import { QUERY_KEYS } from "@/constants/QueryKeies";
 import WithLoadingAndErrors from "@/HOCs/WithLoadingAndErrors";
