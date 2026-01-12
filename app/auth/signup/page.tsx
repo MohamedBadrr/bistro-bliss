@@ -1,13 +1,16 @@
 "use client";
 
-import { Formik, Form } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
-
-import { Button, buttonVariants } from "@/components/ui/button";
-import InputField from "@/components/fields/InputField";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import GoogleButtonSignup from "./_components/GoogleButtonSignup";
+import { signup } from "@/services/auth/signup";
+import { useCustomMutation } from "@/hooks/useCustomMutation";
+import { toast } from "sonner";
+import SignUpForm from "./_components/SignUpForm";
+import { buttonVariants } from "@/components/ui/button";
 
 const SignUpSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -20,7 +23,59 @@ const SignUpSchema = Yup.object().shape({
     .required("Confirm Password is required"),
 });
 
+interface SignUpFormValues {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 const SignUp = () => {
+  const router = useRouter();
+
+  const handleSubmitSignUp = async (values: SignUpFormValues) => {
+    try {
+      const result = await signup({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      });
+
+      if (!result.success) {
+        toast.error(result.error || "Sign up failed");
+        return;
+      }
+
+      // Automatically sign in after successful registration
+      const signInResult = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+
+      if (signInResult?.error) {
+        toast.error("An error occurred while Signing in.");
+      } else if (signInResult?.ok) {
+        router.push("/");
+        router.refresh();
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "An error occurred");
+    }
+  };
+
+  const { mutate, isPending } = useCustomMutation({
+    mutationFn: handleSubmitSignUp,
+    onSuccess: () => {
+      toast.success("Signup Successfully");
+      router.push("/");
+      router.refresh();
+    },
+    onError: (error) => {
+      toast.error(error.message ? error.message : "An Error Occurred");
+    },
+  });
+
   return (
     <div className="min-h-screen pt-20 flex items-center justify-center ">
       <main className="w-full px-4">
@@ -45,68 +100,10 @@ const SignUp = () => {
                 confirmPassword: "",
               }}
               validationSchema={SignUpSchema}
-              onSubmit={(values, { setSubmitting }) => {
-                console.log("Submitting:", values);
-                setTimeout(() => {
-                  setSubmitting(false);
-                }, 2000);
-              }}
+              onSubmit={mutate}
             >
-              {({ isSubmitting, isValid }) => (
-                <Form className="space-y-4">
-                  <InputField
-                    label="Name"
-                    name="name"
-                    type="input"
-                    placeholder="Enter your name"
-                    labelClassName="text-[16px] font-semibold"
-                  />
-
-                  <InputField
-                    label="Email"
-                    name="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    labelClassName="text-[16px] font-semibold"
-                  />
-
-                  <InputField
-                    label="Password"
-                    name="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    labelClassName="text-[16px] font-semibold"
-                  />
-
-                  <InputField
-                    label="Confirm Password"
-                    name="confirmPassword"
-                    type="password"
-                    placeholder="Confirm your password"
-                    labelClassName="text-[16px] font-semibold"
-                  />
-
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={isSubmitting || !isValid}
-                  >
-                    {isSubmitting ? "Signing up..." : "Sign up"}
-                  </Button>
-
-                  <div className="relative py-2">
-                    <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t border-gray-200" />
-                    </div>
-                    <div className="relative flex justify-center">
-                      <span className="bg-white px-2 text-xs text-gray-500">
-                        OR
-                      </span>
-                    </div>
-                  </div>
-
-                  <GoogleButtonSignup />
-                </Form>
+              {({ isValid }) => (
+                <SignUpForm isPending={isPending} isValid={isValid} />
               )}
             </Formik>
             <p className="mt-2 flex items-center justify-center text-sm text-black">

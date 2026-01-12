@@ -2,11 +2,16 @@
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+
+import { useRouter } from "next/navigation";
 import { Button, buttonVariants } from "@/components/ui/button";
 import InputField from "@/components/fields/InputField";
 import Image from "next/image";
 import Link from "next/link";
 import GoogleButtonSignin from "./_components/GoogleButtonSignin";
+import { useCustomMutation } from "@/hooks/useCustomMutation";
+import { login } from "@/services/auth/login";
+import { toast } from "sonner";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email().required("Email is required"),
@@ -16,6 +21,23 @@ const LoginSchema = Yup.object().shape({
 });
 
 const LoginPage = () => {
+  const router = useRouter();
+  const { mutate, isPending } = useCustomMutation({
+    mutationFn: login,
+    onSuccess: () => {
+      toast.success("Logged In Successfully");
+      router.push("/");
+      router.refresh();
+    },
+    onError: (error) => {
+      toast.error(
+        error.message === "Configuration"
+          ? "Invalid email or password"
+          : error.message
+      );
+    },
+  });
+
   return (
     <div className="min-h-screen pt-20  flex items-center justify-center">
       <main className="w-full px-4">
@@ -35,9 +57,9 @@ const LoginPage = () => {
             <Formik
               initialValues={{ email: "", password: "" }}
               validationSchema={LoginSchema}
-              onSubmit={() => {}}
+              onSubmit={mutate}
             >
-              {({ isSubmitting, isValid }) => (
+              {({ isValid }) => (
                 <Form className="space-y-4">
                   <div>
                     <InputField
@@ -54,7 +76,7 @@ const LoginPage = () => {
                       label="Password"
                       name="password"
                       type="password"
-                      placeholder="Enter your email"
+                      placeholder="Enter your password"
                       labelClassName="text-[14px] font-semibold "
                     />
                   </div>
@@ -62,9 +84,10 @@ const LoginPage = () => {
                   <Button
                     type="submit"
                     className="w-full"
-                    disabled={isSubmitting || !isValid}
+                    disabled={!isValid}
+                    isLoading={isPending}
                   >
-                    {isSubmitting ? "Logging in..." : "Sign in"}
+                    Sign in
                   </Button>
 
                   <div className="relative py-2">

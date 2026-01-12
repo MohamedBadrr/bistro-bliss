@@ -6,6 +6,7 @@ import Footer from "@/components/footer/Footer";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import "react-loading-skeleton/dist/skeleton.css";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "@/components/ui/sonner";
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -51,6 +52,7 @@ export default function RootLayout({
 
           {children}
           <Footer />
+          <Toaster />
         </body>
       </ReactQueryProvider>
     </html>

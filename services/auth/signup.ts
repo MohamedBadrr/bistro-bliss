@@ -82,7 +82,23 @@ export const loginUser = async ({
       .eq("email", email)
       .single();
 
-    if (error || !data) {
+    // Check if user exists - Supabase returns error when no record found
+    if (error) {
+      // Check if it's a "not found" error (PGRST116) or any other error
+      if (error.code === "PGRST116" || error.message.includes("No rows")) {
+        return {
+          success: false,
+          error: "Invalid email or password"
+        };
+      }
+      return {
+        success: false,
+        error: "Invalid email or password"
+      };
+    }
+
+    // Double check if data exists
+    if (!data) {
       return {
         success: false,
         error: "Invalid email or password"
@@ -90,6 +106,14 @@ export const loginUser = async ({
     }
 
     const user = data as User;
+
+    // Check if user has a password (OAuth users might have empty password)
+    if (!user.password || user.password.trim() === "") {
+      return {
+        success: false,
+        error: "Invalid email or password"
+      };
+    }
 
     // Verify password
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -118,11 +142,20 @@ export const loginUser = async ({
 
 // Get user by email (for NextAuth)
 export const getUserByEmail = async (email: string): Promise<User | null> => {
-  const { data } = await supabase
-    .from("users")
-    .select("*")
-    .eq("email", email)
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .single();
 
-  return data as User | null;
+    if (error || !data) {
+      return null;
+    }
+
+    return data as User;
+  } catch (error) {
+    console.error("Error fetching user by email:", error);
+    return null;
+  }
 };

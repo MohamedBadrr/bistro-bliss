@@ -1,5 +1,8 @@
+// "use client";
+
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerHeader,
   DrawerTrigger,
@@ -9,8 +12,14 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./Navbar";
+import AuthButton from "./AuthButton";
+import type { Session } from "next-auth";
 
-const NavBarDrawer = () => {
+interface NavBarDrawerProps {
+  session: Session | null;
+}
+
+const NavBarDrawer = ({ session }: NavBarDrawerProps) => {
   return (
     <Drawer direction="left">
       <DrawerTrigger asChild>
@@ -38,28 +47,25 @@ const NavBarDrawer = () => {
           </DrawerHeader>
 
           {/* Content */}
+
           <div className="flex flex-col! overflow-y-auto p-4 ">
-            <Navbar />
+            <Navbar closeOnNavigate />
             <div className="flex items-center justify-center gap-2 absolute top-110!">
-              <Link href={"/auth/login"}>
-                <Button
-                  className="py-0!  text-[13px]! font-semibold font-playfair italic"
-                  variant={"default"}
-                >
-                  Login
-                </Button>
-              </Link>
-              <Link href={"/auth/login"}>
-                <Button
-                  className="py-0!  text-[13px]! font-semibold font-playfair italic"
-                  variant={"outline"}
-                >
-                  Book A Table
-                </Button>
-              </Link>
+              <DrawerClose asChild>
+                <AuthButton session={session} />
+              </DrawerClose>
+              <DrawerClose asChild>
+                <Link href={"/auth/login"}>
+                  <Button
+                    className="py-0!  text-[13px]! font-semibold font-playfair italic"
+                    variant={"outline"}
+                  >
+                    Book A Table
+                  </Button>
+                </Link>
+              </DrawerClose>
             </div>
           </div>
-
           {/* Footer */}
           {/* <div className="border-t p-4">
             <Button className="w-full rounded-full text-lg">Checkout</Button>
