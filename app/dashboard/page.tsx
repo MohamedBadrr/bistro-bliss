@@ -34,7 +34,7 @@ const Dashboard = async () => {
       <div className="flex w-full  flex-col gap-6">
         <HydrationBoundary state={dehydrate(queryClient)}>
           <Tabs defaultValue="products" className="w-full">
-            <TabsList className="mb-5 w-full">
+            <TabsList className="mb-5 w-full flex-col gap-5">
               <TabsTrigger value="products">Products</TabsTrigger>
               <TabsTrigger value="categories">Categories</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>

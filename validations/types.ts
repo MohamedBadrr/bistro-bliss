@@ -21,3 +21,25 @@ export type UpdateProfileFormValues = {
   city?: string;
   file?: File | null;
 };
+
+
+
+export type ProductSizeFormValues = {
+  name: string;
+  price: number;
+};
+
+export type ProductExtraFormValues = {
+  name: string;
+  price: number;
+};
+
+export type AddProductFormValues = {
+  name: string;
+  description?: string;
+  price: number;
+  category: string;
+  sizes: ProductSizeFormValues[];
+  extras: ProductExtraFormValues[];
+  file: File | null;
+};

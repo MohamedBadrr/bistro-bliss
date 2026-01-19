@@ -11,7 +11,7 @@ interface InputFieldProps<T extends FormikValues> {
   label: string;
   name: keyof T;
   placeholder: string;
-  type?: "input" | "textarea" | "password" | "email";
+  type?: "input" | "textarea" | "password" | "email" | "number";
   className?: string;
   labelClassName?: string;
   disabled?: boolean;

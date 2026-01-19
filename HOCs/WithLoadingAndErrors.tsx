@@ -13,7 +13,7 @@ const WithLoadingAndErrors = ({
   isLoading: boolean;
   isError: boolean;
   LoadingComponent: ReactNode;
-  noDataMessage: string;
+  noDataMessage?: string;
   lengthOfData: number;
   children: ReactNode;
 }) => {

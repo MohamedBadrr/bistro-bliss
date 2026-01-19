@@ -7,7 +7,6 @@ import { getProducts } from "@/services/products/getProducts";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -15,26 +14,46 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Edit, TrashIcon } from "lucide-react";
+
+import Link from "next/link";
+import ProductActions from "./_Components/Product/ProductActions";
+import TableSKeleton from "@/skeletons/TableSKeleton";
+import { useMemo, useState } from "react";
+import { Input } from "@/components/ui/input";
 const ProductsTab = () => {
   const { data, isLoading, isError } = useCustomQuery({
     queryKey: QUERY_KEYS.PRODUCTS,
     queryFn: getProducts,
   });
 
+  const [search, setSearch] = useState("");
+  const filteredCategories = useMemo(() => {
+    if (!data) return [];
+    return data?.filter((cate) => cate.name.includes(search));
+  }, [data, search]);
+
   return (
     <WithLoadingAndErrors
-      LoadingComponent={<></>}
+      LoadingComponent={<TableSKeleton />}
       isError={isError}
       isLoading={isLoading}
       lengthOfData={data?.length as number}
       noDataMessage="No items for now, coming soon."
     >
-      <div className="my-10 flex items-center justify-between w-full">
+      <div className=" mb-10 flex flex-col lg:flex-row max-md:gap-5 items-center justify-between w-full">
         <h1 className="text-[35px] font-playfair font-bold text-primary">
           All Products
         </h1>
-        <Button>Add New Product</Button>
+        <Button>
+          <Link href={"/dashboard/add"}>Add New Product</Link>
+        </Button>
+      </div>
+      <div className="-mt-5!">
+        <Input
+          placeholder="Search by name..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
       <div className="overflow-hidden rounded-lg my-5 border">
         <Table className="" style={{ borderRadius: 5 }}>
@@ -49,7 +68,7 @@ const ProductsTab = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.map((item, index) => (
+            {filteredCategories?.map((item, index) => (
               <TableRow
                 key={item.id}
                 className="hover:bg-gray-200 transition-all duration-300"
@@ -77,14 +96,7 @@ const ProductsTab = () => {
                   ))}
                 </TableCell>
                 <TableCell className=" ">
-                  <div className="flex items-center justify-end gap-2">
-                    <Button variant={"outline"} size={"icon"}>
-                      <Edit />
-                    </Button>
-                    <Button size={"icon"}>
-                      <TrashIcon />
-                    </Button>
-                  </div>
+                  <ProductActions product={item} />
                 </TableCell>
               </TableRow>
             ))}

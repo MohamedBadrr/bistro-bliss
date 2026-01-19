@@ -10,6 +10,6 @@ export const getProducts = async (): Promise<Product[] | null> => {
   ),
         product_sizes(*),
         product_extras(*)
-    `);
+    `).order("created_at", { ascending: true });;
   return res.data;
 };

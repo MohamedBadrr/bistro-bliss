@@ -3,7 +3,7 @@
 export type ProductSize = {
   id: string;
   product_id: string;
-  name: "SMALL" | "MEDIUM" | "LARGE";
+  size: "SMALL" | "MEDIUM" | "LARGE";
   price: number;
 };
 export type Category = {
@@ -13,7 +13,7 @@ export type Category = {
 export type ProductExtra = {
   id: string;
   product_id: string;
-  name: "CHEESE" | "BACON" | "TOMATO" | "ONION" | "PEPPER";
+  name: string;
   price: number;
 };
 
@@ -22,7 +22,6 @@ export type Product = {
   name: string;
   description: string;
   image: string;
-  display_order: number;
   price: number;
   category_id: string;
  categories: Category | null;

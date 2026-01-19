@@ -27,3 +27,33 @@ export const UpdateProfileSchema = Yup.object({
   city: Yup.string().nullable(),
   file: Yup.mixed().nullable().notRequired(),
 });
+
+export const AddProductValidationSchema = (isEdit: boolean) =>
+  Yup.object({
+    name: Yup.string().required("Product Name is Required").min(3),
+    description: Yup.string().required("Product Description is Required."),
+    price: Yup.number()
+      .typeError("Price must be a number")
+      .positive("Must be Greater than 0")
+      .required("Price is Required"),
+    category: Yup.string().required("Category is Required"),
+    sizes: Yup.array().of(
+      Yup.object({
+        name: Yup.string().required("Size name is required"),
+        price: Yup.number()
+          .typeError("Size price must be a number")
+          .required("Size price is required"),
+      })
+    ),
+    file: isEdit
+      ? Yup.mixed().optional().nullable()
+      : Yup.mixed().required("Product Image is required"),
+    extras: Yup.array().of(
+      Yup.object({
+        name: Yup.string().required("Size name is required"),
+        price: Yup.number()
+          .typeError("Size price must be a number")
+          .required("Size price is required"),
+      })
+    ),
+  });
