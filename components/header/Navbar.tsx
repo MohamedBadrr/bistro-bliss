@@ -3,12 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DrawerClose } from "../ui/drawer";
+import { UserProfile } from "@/services/user/getMe";
+import { profile } from "console";
+import { Session } from "next-auth";
 
 type NavbarProps = {
   closeOnNavigate?: boolean;
+  session: Session | null;
+  profile: UserProfile;
 };
 
-const Navbar = ({ closeOnNavigate = false }: NavbarProps) => {
+const Navbar = ({ closeOnNavigate = false, profile, session }: NavbarProps) => {
   const pathname = usePathname();
 
   const Wrap = ({ children }: { children: React.ReactElement }) =>
@@ -37,21 +42,23 @@ const Navbar = ({ closeOnNavigate = false }: NavbarProps) => {
             </li>
           );
         })}
-        <li>
-          <Link
-            href={"/dashboard"}
-            className="relative w-fit text-base font-semibold font-playfair italic transition-all duration-300 group"
-          >
-            {"Dashboard"}
-            <span
-              className={`absolute left-0 -bottom-1 h-0.5 bg-primary transition-all duration-300 ${
-                pathname.includes("/dashboard")
-                  ? "w-full"
-                  : "w-0 group-hover:w-full"
-              }`}
-            />
-          </Link>
-        </li>
+        {session?.user.role === "ADMIN" && (
+          <li>
+            <Link
+              href={"/dashboard"}
+              className="relative w-fit text-base font-semibold font-playfair italic transition-all duration-300 group"
+            >
+              {"Dashboard"}
+              <span
+                className={`absolute left-0 -bottom-1 h-0.5 bg-primary transition-all duration-300 ${
+                  pathname.includes("/dashboard")
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
+                }`}
+              />
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

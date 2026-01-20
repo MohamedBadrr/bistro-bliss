@@ -10,6 +10,7 @@ import { QUERY_KEYS } from "@/constants/QueryKeies";
 import { getProducts } from "@/services/products/getProducts";
 import { getCategories } from "@/services/categories/getCategories";
 import CategoriesTab from "./CategoriesTab";
+import UsersTab from "./UsersTab";
 const Dashboard = async () => {
   const profile = await getMe();
   const queryClient = new QueryClient();
@@ -26,15 +27,15 @@ const Dashboard = async () => {
   return (
     <main className="pt-22 container min-h-screen">
       <div className="w-full flex items-center justify-center">
-        <h1 className="text-[44px] italic text-primary mb-10">
-          Welcome Back {profile.name}
+        <h1 className="text-[44px] font-bold italic text-primary mb-10">
+          Dashboard 
         </h1>
       </div>
 
       <div className="flex w-full  flex-col gap-6">
         <HydrationBoundary state={dehydrate(queryClient)}>
           <Tabs defaultValue="products" className="w-full">
-            <TabsList className="mb-5 w-full flex-col gap-5">
+            <TabsList className="mb-5 w-full flex-col gap-5 lg:-ms-15">
               <TabsTrigger value="products">Products</TabsTrigger>
               <TabsTrigger value="categories">Categories</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>
@@ -46,7 +47,7 @@ const Dashboard = async () => {
               <CategoriesTab />
             </TabsContent>
             <TabsContent value="users">
-              <div>password</div>
+              <UsersTab />
             </TabsContent>
           </Tabs>
         </HydrationBoundary>

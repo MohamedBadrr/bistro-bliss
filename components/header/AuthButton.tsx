@@ -2,9 +2,9 @@
 
 import { Button } from "../ui/button";
 import Link from "next/link";
-import type { Session } from "next-auth";
 import { UserSettings } from "@/app/profile/UserSettings";
 import { UserProfile } from "@/services/user/getMe";
+import { Session } from "next-auth";
 
 interface AuthButtonProps {
   session: Session | null;

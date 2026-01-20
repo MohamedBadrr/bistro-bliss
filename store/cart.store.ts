@@ -1,6 +1,6 @@
 "use client";
 
-import { ProductExtra, ProductSize } from "@/types/Products";
+import { ProductExtra, ProductSize } from "@/types/Product";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 

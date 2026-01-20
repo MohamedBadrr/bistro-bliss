@@ -9,13 +9,14 @@ export type UserProfile = {
   street_address: string;
   city: string;
   country: string;
+  role: "ADMIN" | "USER";
   file?: File | null
 };
 export const getMe = async (): Promise<UserProfile>=> {
   const session = await auth();
 
   if (!session?.user?.id) {
-    throw new Error("Unauthenticated");
+    return null ;
   }
 
   const { data, error } = await supabase
@@ -29,6 +30,7 @@ export const getMe = async (): Promise<UserProfile>=> {
       image,
       street_address,
       city,
+      role,
       country
     `
     )

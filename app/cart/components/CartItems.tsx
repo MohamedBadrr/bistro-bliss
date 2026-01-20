@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/formatter";
 import { getSubTotal } from "@/lib/getSubTotal";
 import { CartItem, useCart } from "@/store/cart.store";
-import { ProductExtra } from "@/types/Products";
+import { ProductExtra } from "@/types/Product";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 function CartItems() {
   const deliveryFee = 5;
@@ -21,6 +22,7 @@ function CartItems() {
     currentQuantity: number
   ) => {
     updateQuantity(uniqueId, currentQuantity + 1);
+    toast.success("item added Successfully");
   };
 
   const handleDecreaseQuantity = (
@@ -29,8 +31,10 @@ function CartItems() {
   ) => {
     if (currentQuantity > 1) {
       updateQuantity(uniqueId, currentQuantity - 1);
+      toast.success("item removed Successfully");
     } else {
       removeItemCart(uniqueId);
+      toast.success("item removed Successfully");
     }
   };
 
@@ -157,7 +161,10 @@ function CartItems() {
                         </div>
                       </div>
                       <Button
-                        onClick={() => removeItemCart(item.uniqueId!)}
+                        onClick={() => {
+                          removeItemCart(item.uniqueId!)
+                          toast.success("Item deleted successfully.")
+                        }}
                         variant="outline"
                         size="sm"
                         className="h-9 w-9 p-0 border-red-200 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors"

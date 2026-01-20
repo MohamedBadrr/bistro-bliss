@@ -13,7 +13,7 @@ const CartButton = () => {
         {getTotalCartQuantity(cart)}
       </div> : <></>}
       <ShoppingCart
-        size={32}
+        size={28}
         className=" cursor-pointer text-[45px]! hover:text-primary transition-all duration-300"
       />
     </div>

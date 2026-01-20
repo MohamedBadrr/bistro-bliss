@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 import {
   Drawer,
@@ -13,18 +13,20 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./Navbar";
 import AuthButton from "./AuthButton";
-import type { Session } from "next-auth";
+import { UserProfile } from "@/services/user/getMe";
+import { Session } from "next-auth";
 
 interface NavBarDrawerProps {
   session: Session | null;
+  profile: UserProfile;
 }
 
-const NavBarDrawer = ({ session }: NavBarDrawerProps) => {
+const NavBarDrawer = ({ session, profile }: NavBarDrawerProps) => {
   return (
     <Drawer direction="left">
       <DrawerTrigger asChild>
-        <Button className="lg:hidden" size="icon" variant={"ghost"}>
-          <Menu className="h-8! w-8! mt-2" />
+        <Button className="block lg:hidden" size="icon" variant={"ghost"}>
+          <Menu className="h-7! w-7! mt-2" />
         </Button>
       </DrawerTrigger>
 
@@ -49,10 +51,18 @@ const NavBarDrawer = ({ session }: NavBarDrawerProps) => {
           {/* Content */}
 
           <div className="flex flex-col! overflow-y-auto p-4 ">
-            <Navbar closeOnNavigate />
-            <div className="flex items-center justify-center gap-2 absolute top-110!">
+            <Navbar
+              closeOnNavigate
+              profile={profile}
+              session={session as Session}
+            />
+            <div
+              className={`flex items-center justify-center gap-2 absolute ${
+                session?.user.role === "ADMIN" ? " top-125! " : " top-110! "
+              }  `}
+            >
               <DrawerClose asChild>
-                <AuthButton session={session} />
+                <AuthButton profile={profile} session={session} />
               </DrawerClose>
               <DrawerClose asChild>
                 <Link href={"/auth/login"}>

@@ -42,3 +42,18 @@ export type CustomError = {
 };
 
 
+
+export type UserProfile = {
+  id: string;
+  email: string;
+  name: string;
+  image: string | null;
+  phone: string | null;
+  street_address: string | null;
+  postal_code: string | null;
+  city: string | null;
+  country: string | null;
+  role: "USER" | "ADMIN";
+  created_at: string;
+  updated_at: string;
+};

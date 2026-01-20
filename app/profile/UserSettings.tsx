@@ -15,9 +15,11 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { UserProfile } from "../../services/user/getMe";
 import Image from "next/image";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function UserSettings({ profile }: { profile: UserProfile }) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const handleLogout = async () => {
     try {
       await signOut({ redirect: false });
@@ -32,6 +34,7 @@ export function UserSettings({ profile }: { profile: UserProfile }) {
   const { mutate } = useCustomMutation({
     mutationFn: handleLogout,
     onSuccess: () => {
+      queryClient.clear();
       toast.success("Logged out Successfully");
     },
     onError: (error) => {

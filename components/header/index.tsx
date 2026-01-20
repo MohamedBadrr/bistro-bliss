@@ -30,7 +30,7 @@ async function Header() {
         </Link>
 
         <div className="hidden lg:block">
-          <Navbar />
+          <Navbar session={session} profile={profile}/>
         </div>
 
         <div className="flex items-center justify-center gap-3">
@@ -59,7 +59,7 @@ async function Header() {
           </div>
           <CartButton />
           <div className="block lg:hidden">
-            <NavBarDrawer session={session} />
+            <NavBarDrawer session={session} profile={profile} />
           </div>
         </div>
       </div>

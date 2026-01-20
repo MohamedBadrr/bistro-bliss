@@ -14,11 +14,12 @@ import Image from "next/image";
 import { PickSize } from "./PickSize";
 import Divider from "@/components/shared/Divider";
 import Extras from "./Extras";
-import { Product, ProductExtra, ProductSize } from "@/types/Products";
 import { Form, Formik } from "formik";
 import { useCart } from "@/store/cart.store";
 import { useState } from "react";
 import { formatCurrency } from "@/lib/formatter";
+import { toast } from "sonner";
+import { Product, ProductExtra, ProductSize } from "@/types/Product";
 
 type AddToCartFormValues = {
   name: string;
@@ -47,6 +48,7 @@ const AddToCardButton = (item: Product) => {
   const handleAddToCart = (item: AddToCartFormValues) => {
     addToCart(item);
     setOpenDialog(false);
+    toast.success("Dish added to your Cart.")
   };
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
