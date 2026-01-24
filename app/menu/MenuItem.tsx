@@ -34,6 +34,8 @@ const MenuItem = (props: Product) => {
           product_extras={props.product_extras}
           product_sizes={props.product_sizes}
           category_id={props.category_id}
+          categories={props.categories}
+          updated_at={props.updated_at}
         />
       </div>
     </div>
