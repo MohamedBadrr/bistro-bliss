@@ -40,6 +40,8 @@ const MenuItems = () => {
               product_extras={item.product_extras}
               product_sizes={item.product_sizes}
               category_id={item.category_id}
+              categories={item.categories}
+              updated_at={item.updated_at}
             />
           ))}
         </div>
