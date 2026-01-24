@@ -11,11 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Edit } from "lucide-react";
-import { getCategories } from "@/services/categories/getCategories";
-import DeleteCategoryButton from "./_Components/Category/DeleteCategoryButton";
-import { AddUpdateCategoryModal } from "./_Components/Category/AddUpdateCategoryModal";
 import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import NoData from "@/components/shared/NoData";

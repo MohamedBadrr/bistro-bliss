@@ -2,6 +2,7 @@
 
 import InputField from "@/components/fields/InputField";
 import { Button } from "@/components/ui/button";
+import { QUERY_KEYS } from "@/constants/QueryKeies";
 import { useCustomMutation } from "@/hooks/useCustomMutation";
 import { formatCurrency } from "@/lib/formatter";
 import { getTotalAmount } from "@/lib/getTotalAmount";
@@ -9,12 +10,14 @@ import { createOrder } from "@/services/orders/createOrder";
 import { UserProfile } from "@/services/user/getMe";
 import { useCart } from "@/store/cart.store";
 import { checkoutValidationSchema } from "@/validations";
+import { useQueryClient } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 function CheckoutForm({ profile }: { profile: UserProfile }) {
   const { cart, clearCart } = useCart();
+  const queryClient = useQueryClient();
   const initialValues = {
     phone: "",
     address: "",
@@ -34,6 +37,12 @@ function CheckoutForm({ profile }: { profile: UserProfile }) {
       toast.success("Order make done");
       router.push("/cart/success");
       clearCart();
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.ALL_ORDERS,
+      });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.MY_ORDERS,
+      });
     },
   });
   return (

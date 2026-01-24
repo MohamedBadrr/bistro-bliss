@@ -11,6 +11,7 @@ import { getProducts } from "@/services/products/getProducts";
 import { getCategories } from "@/services/categories/getCategories";
 import CategoriesTab from "./CategoriesTab";
 import UsersTab from "./UsersTab";
+import OrdersTab from "./OrdersTab";
 const Dashboard = async () => {
   const profile = await getMe();
   const queryClient = new QueryClient();
@@ -28,7 +29,7 @@ const Dashboard = async () => {
     <main className="pt-22 container min-h-screen">
       <div className="w-full flex items-center justify-center">
         <h1 className="text-[44px] font-bold italic text-primary mb-10">
-          Dashboard 
+          Dashboard
         </h1>
       </div>
 
@@ -39,6 +40,7 @@ const Dashboard = async () => {
               <TabsTrigger value="products">Products</TabsTrigger>
               <TabsTrigger value="categories">Categories</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>
+              <TabsTrigger value="orders">Orders</TabsTrigger>
             </TabsList>
             <TabsContent value="products">
               <ProductsTab />
@@ -48,6 +50,9 @@ const Dashboard = async () => {
             </TabsContent>
             <TabsContent value="users">
               <UsersTab />
+            </TabsContent>
+            <TabsContent value="orders">
+              <OrdersTab />
             </TabsContent>
           </Tabs>
         </HydrationBoundary>
