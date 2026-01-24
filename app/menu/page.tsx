@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Bistro Bliss | Our Menu",
+  description: "Explore our delicious menu and order your favorite dishes.",
+};
+
 import {
   dehydrate,
   HydrationBoundary,

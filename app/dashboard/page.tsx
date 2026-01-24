@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "Bistro Bliss | Dashboard",
+  description:
+    "Admin dashboard for managing products, categories, users, and orders.",
+};
+
 import { getMe } from "@/services/user/getMe";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductsTab from "./ProductsTab";

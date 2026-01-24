@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Bistro Bliss | Shopping Cart",
+  description: "Review and manage the items in your shopping cart.",
+};
+
 import { getMe } from "@/services/user/getMe";
 import CartItems from "./components/CartItems";
 
@@ -11,7 +16,7 @@ const Page = async () => {
             Shopping Cart
           </h2>
 
-          <CartItems profile={profile}/>
+          <CartItems profile={profile} />
         </div>
       </section>
     </main>

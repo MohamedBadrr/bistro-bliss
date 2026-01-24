@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Bistro Bliss | My Profile",
+  description: "View and update your profile information at Bistro Bliss.",
+};
+
 import ProfileClient from "./ProfileClient";
 import { getMe } from "../../services/user/getMe";
 

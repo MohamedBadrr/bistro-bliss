@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "Bistro Bliss | My Orders",
+  description:
+    "View your order history and track your current orders at Bistro Bliss.",
+};
+
 import { getMe } from "@/services/user/getMe";
 import MyOrdersTable from "./_components/MyOrdersTable";
 

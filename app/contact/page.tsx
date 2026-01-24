@@ -5,6 +5,12 @@ import { Button } from "@/components/ui/button";
 import { ContactUsValidationSchema } from "@/validations";
 import { Form, Formik } from "formik";
 
+export const metadata = {
+  title: "Bistro Bliss | Contact Us",
+  description:
+    "Get in touch with Bistro Bliss for reservations, feedback, or inquiries.",
+};
+
 const initialValues = {
   email: "",
   name: "",
@@ -17,8 +23,7 @@ const ContactUs = () => {
     name: string;
     subject: string;
     message: string;
-  }) => {
-  };
+  }) => {};
   return (
     <div className="bg-neutral-50">
       <div className="container flex flex-col items-center justify-center gap-15 pb-15 pt-25">
@@ -36,7 +41,7 @@ const ContactUs = () => {
           validateOnMount={false}
           validateOnBlur={true}
         >
-          {({isValid}) => (
+          {({ isValid }) => (
             <Form className="w-full items-center justify-center flex ">
               <div className="flex gap-7 items-center p-10 rounded-lg bg-white border border-neutral-200 justify-center max-w-179.25 w-full flex-col">
                 <div className="flex gap-6 w-full item-center ">
@@ -63,7 +68,12 @@ const ContactUs = () => {
                   placeholder="Write your message"
                   type="textarea"
                 />
-                <Button type="submit" disabled={!isValid} className="w-full" variant={"default"} >
+                <Button
+                  type="submit"
+                  disabled={!isValid}
+                  className="w-full"
+                  variant={"default"}
+                >
                   Send
                 </Button>
               </div>

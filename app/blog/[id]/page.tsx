@@ -1,6 +1,11 @@
 import { BLOGS } from "@/constants/blogs";
 import Image from "next/image";
 
+export const metadata = {
+  title: "Bistro Bliss | Blog Article",
+  description: "Read this article from Bistro Bliss blog.",
+};
+
 interface props {
   params: Promise<{ id: string }>;
 }

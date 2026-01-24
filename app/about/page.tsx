@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Bistro Bliss | About Us",
+  description: "Learn more about our story, values, and what makes us special.",
+};
+
 import ProvideHealthy from "../_components/ProvideHealthy";
 import WhatOurCustomerSays from "../_components/WhatOurCustomerSays";
 import AboutVideo from "./components/AboutVideo";

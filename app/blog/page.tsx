@@ -2,6 +2,11 @@ import Link from "next/link";
 import BlogCard from "../_components/BlogCard";
 import { BLOGS } from "@/constants/blogs";
 
+export const metadata = {
+  title: "Bistro Bliss | Our Blog",
+  description: "Read the latest articles and updates from Bistro Bliss.",
+};
+
 const Page = () => {
   return (
     <div className="container pt-20 mt-10 md:mt-2">

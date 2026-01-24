@@ -24,7 +24,6 @@ export const getMe = async () : Promise<UserProfile> => {
   const emailRaw = session?.user?.email as string | undefined;
   const email = emailRaw?.toLowerCase();
 
-  console.log("SESSION in getMe:", { userId, emailRaw, email });
 
   if (!userId && !email) return null;
 
@@ -34,11 +33,10 @@ export const getMe = async () : Promise<UserProfile> => {
 
   const query = isUuid(userId)
     ? base.eq("id", userId!)
-    : base.eq("email", email!); // بعد toLowerCase
+    : base.eq("email", email!);
 
   const { data, error } = await query.maybeSingle();
 
-  console.log("getMe result:", { error, data });
 
   if (error || !data) return null;
   return data;
