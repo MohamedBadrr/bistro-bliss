@@ -37,6 +37,7 @@ const ItemOptions = ({ ButtonText, field }: ItemOptions) => {
     const filteredItems = items.filter((_, i) => i !== index);
     setFieldValue(field, filteredItems);
   };
+  
   const selectedSizes = items.map((i) => i.name);
   return (
     <div className="">

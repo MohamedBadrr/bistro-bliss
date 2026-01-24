@@ -18,7 +18,7 @@ import { Session } from "next-auth";
 
 interface NavBarDrawerProps {
   session: Session | null;
-  profile: UserProfile;
+  profile: UserProfile | null;
 }
 
 const NavBarDrawer = ({ session, profile }: NavBarDrawerProps) => {

@@ -17,8 +17,10 @@ import { UserProfile } from "../../services/user/getMe";
 import Image from "next/image";
 import { useQueryClient } from "@tanstack/react-query";
 
-export function UserSettings({ profile }: { profile: UserProfile }) {
+export function UserSettings({ profile }: { profile: UserProfile | null }) {
   const router = useRouter();
+  console.log("profile in user setting", profile);
+  
   const queryClient = useQueryClient();
   const handleLogout = async () => {
     try {
@@ -41,7 +43,7 @@ export function UserSettings({ profile }: { profile: UserProfile }) {
       toast.success(error.message ? error.message : "Error Logout");
     },
   });
-
+ 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -58,12 +60,12 @@ export function UserSettings({ profile }: { profile: UserProfile }) {
           {" "}
           <Image
             alt="profileIMage"
-            src={profile.image ?? "/assets/profileIamge.png"}
+            src={profile?.image ?? "/assets/profileIamge.png"}
             width={50}
             height={50}
             className="rounded-full w-12! h-12!"
           />
-          <h1>{profile.name}</h1>
+          <h1>{profile?.name ?? ""}</h1>
         </DropdownMenuLabel>
 
         <DropdownMenuGroup>
@@ -75,8 +77,13 @@ export function UserSettings({ profile }: { profile: UserProfile }) {
           >
             Profile Settings
           </DropdownMenuItem>
-          <DropdownMenuItem className="hover:bg-gray-100!">
-            Your Orders
+          <DropdownMenuItem
+            className="hover:bg-gray-100!"
+            onClick={() => {
+              router.push("/orders");
+            }}
+          >
+            My Orders
           </DropdownMenuItem>
         </DropdownMenuGroup>
 

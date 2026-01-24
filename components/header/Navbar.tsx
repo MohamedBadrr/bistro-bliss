@@ -10,7 +10,7 @@ import { Session } from "next-auth";
 type NavbarProps = {
   closeOnNavigate?: boolean;
   session: Session | null;
-  profile: UserProfile;
+  profile: UserProfile | null;
 };
 
 const Navbar = ({ closeOnNavigate = false, profile, session }: NavbarProps) => {

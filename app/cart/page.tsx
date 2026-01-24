@@ -1,7 +1,8 @@
-import CheckoutForm from "./components/CheckoutForm";
+import { getMe } from "@/services/user/getMe";
 import CartItems from "./components/CartItems";
 
-const Page = () => {
+const Page = async () => {
+  const profile = await getMe();
   return (
     <main>
       <section className="pt-25 pb-5 min-h-screen">
@@ -10,10 +11,7 @@ const Page = () => {
             Shopping Cart
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            <CartItems />
-            <CheckoutForm />
-          </div>
+          <CartItems profile={profile}/>
         </div>
       </section>
     </main>

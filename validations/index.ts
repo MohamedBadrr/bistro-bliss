@@ -57,3 +57,25 @@ export const AddProductValidationSchema = (isEdit: boolean) =>
       })
     ),
   });
+
+
+
+export const checkoutValidationSchema = Yup.object({
+  phone: Yup.string()
+    .required("Phone is required")
+    .matches(/^(01)[0-9]{9}$/, "Invalid Egyptian phone number"),
+
+  address: Yup.string()
+    .required("Address is required")
+    .min(10, "Address must be at least 10 characters"),
+
+  postalCode: Yup.string()
+    .required("Postal code is required")
+    .min(4, "Invalid postal code"),
+
+  city: Yup.string()
+    .required("City is required"),
+
+  country: Yup.string()
+    .required("Country is required"),
+});

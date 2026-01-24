@@ -8,7 +8,7 @@ import { Session } from "next-auth";
 
 interface AuthButtonProps {
   session: Session | null;
-  profile: UserProfile;
+  profile: UserProfile | null;
 }
 
 const AuthButton = ({ session, profile }: AuthButtonProps) => {

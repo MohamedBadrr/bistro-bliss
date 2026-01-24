@@ -1,8 +1,41 @@
-import type { User as NextAuthUser } from "next-auth";
+import type { User as NextAuthUser, Session } from "next-auth";
+import type { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { supabase } from "@/lib/supabaseClient";
-import { getUserByEmail, loginUser } from "@/services/auth/signup";
+import { loginUser } from "@/services/auth/signup";
+
+type Role = "USER" | "ADMIN";
+
+type AppUser = NextAuthUser & {
+  id: string;
+  role: Role;
+};
+
+type AppToken = JWT & {
+  id: string;
+  role: Role;
+};
+
+type AppSession = Session & {
+  user: Session["user"] & {
+    id: string;
+    role: Role;
+  };
+};
+
+type GoogleAccount = {
+  provider: string;
+  type: string;
+  providerAccountId: string;
+  refresh_token?: string | null;
+  access_token?: string | null;
+  expires_at?: number | null;
+  token_type?: string | null;
+  scope?: string | null;
+  id_token?: string | null;
+  session_state?: string | null;
+};
 
 export const authOptions = {
   providers: [
@@ -12,7 +45,7 @@ export const authOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials): Promise<NextAuthUser | null> {
+      async authorize(credentials): Promise<AppUser | null> {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Please enter email and password");
         }
@@ -20,14 +53,7 @@ export const authOptions = {
         const email = typeof credentials.email === "string" ? credentials.email : "";
         const password = typeof credentials.password === "string" ? credentials.password : "";
 
-        if (!email || !password) {
-          throw new Error("Please enter email and password");
-        }
-
-        const result = await loginUser({
-          email,
-          password,
-        });
+        const result = await loginUser({ email, password });
 
         if (!result.success || !result.user) {
           throw new Error(result.error || "Login failed");
@@ -38,10 +64,11 @@ export const authOptions = {
           email: result.user.email,
           name: result.user.name,
           image: result.user.image,
-          role: result.user.role,
+          role: result.user.role as Role,
         };
       },
     }),
+
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
@@ -54,87 +81,112 @@ export const authOptions = {
       },
     }),
   ],
+
   callbacks: {
-    async signIn({ user, account }: { user: NextAuthUser; account: { provider: string; type: string; providerAccountId: string; refresh_token?: string | null; access_token?: string | null; expires_at?: number | null; token_type?: string | null; scope?: string | null; id_token?: string | null; session_state?: string | null } | null }) {
+    async signIn({
+      user,
+      account,
+    }: {
+      user: NextAuthUser;
+      account: GoogleAccount | null;
+    }): Promise<boolean> {
       if (account?.provider === "google") {
-        if (!user.email) return false;
+        const rawEmail = user.email;
+        if (!rawEmail) return false;
 
-        try {
-          // Check if user exists
-          const existingUser = await getUserByEmail(user.email);
+        const email = rawEmail.toLowerCase();
 
-          if (!existingUser) {
-            // Create new user for Google sign-in
-            const { error: insertError } = await supabase.from("users").insert([
+        const { data: dbUser, error } = await supabase
+          .from("users")
+          .upsert(
+            [
               {
-                email: user.email,
+                email,
                 name: user.name || "",
                 image: user.image || null,
-                password: "", // No password for OAuth users
-                role: "USER" as const,
+                password: "",
+                role: "USER",
               },
-            ]);
+            ],
+            { onConflict: "email" }
+          )
+          .select("id,email,role")
+          .single();
 
-            if (insertError) {
-              console.error("Error creating user:", insertError);
-              return false;
-            }
-          }
+        if (error || !dbUser) return false;
 
-          // Store account information
-          const dbUser = await getUserByEmail(user.email);
-          if (dbUser && account) {
-            const { error: accountError } = await supabase.from("accounts").upsert([
-              {
-                user_id: dbUser.id,
-                type: account.type,
-                provider: account.provider,
-                provider_account_id: account.providerAccountId,
-                refresh_token: account.refresh_token || null,
-                access_token: account.access_token || null,
-                expires_at: account.expires_at || null,
-                token_type: account.token_type || null,
-                scope: account.scope || null,
-                id_token: account.id_token || null,
-                session_state: account.session_state || null,
-              },
-            ]);
+        (user as AppUser).id = dbUser.id;
+        (user as AppUser).role = dbUser.role as Role;
 
-            if (accountError) {
-              console.error("Error storing account:", accountError);
-              // Don't fail sign-in if account storage fails
-            }
-          }
-        } catch (error) {
-          console.error("Error in signIn callback:", error);
-          return false;
-        }
+        await supabase.from("accounts").upsert([
+          {
+            user_id: dbUser.id,
+            type: account.type,
+            provider: account.provider,
+            provider_account_id: account.providerAccountId,
+            refresh_token: account.refresh_token || null,
+            access_token: account.access_token || null,
+            expires_at: account.expires_at || null,
+            token_type: account.token_type || null,
+            scope: account.scope || null,
+            id_token: account.id_token || null,
+            session_state: account.session_state || null,
+          },
+        ]);
       }
+
       return true;
     },
-    async jwt({ token, user }: { token: { id?: string; role?: "USER" | "ADMIN" }; user?: NextAuthUser }) {
+
+    async jwt({
+      token,
+      user,
+    }: {
+      token: JWT;
+      user?: NextAuthUser;
+    }): Promise<AppToken> {
+      const t = token as AppToken;
+
       if (user) {
-        token.id = user.id;
-        token.role = user.role;
+        const u = user as AppUser;
+
+        t.id = u.id;
+        t.role = (u.role ?? "USER") as Role;
       }
-      return token;
+
+      if (!t.role) t.role = "USER";
+      if (!t.id && user && (user).id) t.id = (user).id;
+
+      return t;
     },
-    async session({ session, token }: { session: { user: { id?: string; role?: "USER" | "ADMIN"; email?: string | null; name?: string | null; image?: string | null } }; token: { id?: string; role?: "USER" | "ADMIN" } }) {
-      if (session.user) {
-        session.user.id = token.id;
-        session.user.role = token.role;
-      }
-      return session;
+
+    async session({
+      session,
+      token,
+    }: {
+      session: Session;
+      token: JWT;
+    }): Promise<AppSession> {
+      const s = session as AppSession;
+      const t = token as AppToken;
+
+      s.user.id = t.id;
+      s.user.role = t.role;
+
+      return s;
     },
   },
+
   pages: {
     signIn: "/auth/login",
     signOut: "/auth/login",
     error: "/auth/login",
   },
+
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60,
   },
+
   secret: process.env.AUTH_SECRET,
 };

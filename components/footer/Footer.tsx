@@ -64,7 +64,7 @@ const Footer = () => {
             ))}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <p className="mb-10 text-white font-bold">Follow Us On Instagram</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <Image

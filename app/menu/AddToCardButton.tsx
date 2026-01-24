@@ -37,7 +37,7 @@ const AddToCardButton = (item: Product) => {
   const existItem = cart.find((i) => i.id === item.id);
   const initialValues: AddToCartFormValues = {
     basePrice: existItem?.basePrice ?? item.price,
-    id: existItem?.id ?? item.image,
+    id: existItem?.id ?? item.id,
     image: existItem?.image ?? item.image,
     name: item.name,
     extras: existItem?.extras ?? [],
