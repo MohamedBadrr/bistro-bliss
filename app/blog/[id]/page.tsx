@@ -6,7 +6,6 @@ interface props {
 }
 const OneBlog = async ({ params }: props) => {
   const { id } = await params;
-  console.log("params", id);
   const SelectedBLog = BLOGS.find((blog) => blog.id === id);
   return (
     <div className="container pt-10 pb-10">

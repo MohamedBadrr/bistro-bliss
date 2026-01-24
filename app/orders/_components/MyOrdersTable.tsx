@@ -21,8 +21,6 @@ const MyOrdersTable = ({ userId }: { userId: string }) => {
     queryKey: QUERY_KEYS.MY_ORDERS,
   });
 
-  console.log("orderrrrrrrrrrrrrrrrrrrrs", data);
-
   return (
     <div>
       <WithLoadingAndErrors

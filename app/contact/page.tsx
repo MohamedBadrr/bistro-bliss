@@ -18,7 +18,6 @@ const ContactUs = () => {
     subject: string;
     message: string;
   }) => {
-    console.log(values);
   };
   return (
     <div className="bg-neutral-50">

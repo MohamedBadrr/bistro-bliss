@@ -13,7 +13,6 @@ const MenuFilters = ({ setFilter }: { setFilter: (value: string) => void }) => {
     queryFn: getCategories,
     queryKey: QUERY_KEYS.CATEGORIES,
   });
-  console.log("data category", data);
 
   const handleClickFilter = (filter: string) => {
     setSelectedFilters(filter);

@@ -51,7 +51,6 @@ function CheckoutForm({ profile }: { profile: UserProfile }) {
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          console.log("ITEMS SENT", cart, values);
           mutate({
             cart: cart,
             city: values.city,

@@ -19,8 +19,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export function UserSettings({ profile }: { profile: UserProfile | null }) {
   const router = useRouter();
-  console.log("profile in user setting", profile);
-  
+
   const queryClient = useQueryClient();
   const handleLogout = async () => {
     try {
@@ -43,7 +42,7 @@ export function UserSettings({ profile }: { profile: UserProfile | null }) {
       toast.success(error.message ? error.message : "Error Logout");
     },
   });
- 
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
