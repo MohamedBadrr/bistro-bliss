@@ -17,6 +17,8 @@ import { getCategories } from "@/services/categories/getCategories";
 import CategoriesTab from "./CategoriesTab";
 import UsersTab from "./UsersTab";
 import OrdersTab from "./OrdersTab";
+import ReservationsTab from "./ReservationsTab";
+
 const Dashboard = async () => {
   const queryClient = new QueryClient();
 
@@ -45,6 +47,7 @@ const Dashboard = async () => {
               <TabsTrigger value="categories">Categories</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>
               <TabsTrigger value="orders">Orders</TabsTrigger>
+              <TabsTrigger value="reservations">Reservations</TabsTrigger>
             </TabsList>
             <TabsContent value="products">
               <ProductsTab />
@@ -57,6 +60,9 @@ const Dashboard = async () => {
             </TabsContent>
             <TabsContent value="orders">
               <OrdersTab />
+            </TabsContent>
+            <TabsContent value="reservations">
+              <ReservationsTab />
             </TabsContent>
           </Tabs>
         </HydrationBoundary>

@@ -13,9 +13,11 @@ const Hero = () => {
           welcoming, culinary haven.
         </p>
         <div className="flex gap-4 items-center justify-center">
-          <Button variant={"default"} className="">
-            Book a Table
-          </Button>
+          <Link href={"/reservation"}>
+            <Button className="" variant={"default"}>
+              Book A Table
+            </Button>
+          </Link>
           <Link href={"/menu"}>
             <Button variant={"outline"} className="">
               Explore Menu

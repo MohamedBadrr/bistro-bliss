@@ -65,7 +65,7 @@ const NavBarDrawer = ({ session, profile }: NavBarDrawerProps) => {
                 <AuthButton profile={profile} session={session} />
               </DrawerClose>
               <DrawerClose asChild>
-                <Link href={"/auth/login"}>
+                <Link href={"/reservation"}>
                   <Button
                     className="py-0!  text-[13px]! font-semibold font-playfair italic"
                     variant={"outline"}

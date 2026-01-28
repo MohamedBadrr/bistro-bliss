@@ -29,7 +29,9 @@ const ProductsTab = () => {
   const [search, setSearch] = useState("");
   const filteredCategories = useMemo(() => {
     if (!data) return [];
-    return data?.filter((cate) => cate.name.includes(search));
+    return data?.filter((cate) =>
+      cate.name.toLowerCase().includes(search.toLocaleLowerCase())
+    );
   }, [data, search]);
 
   return (

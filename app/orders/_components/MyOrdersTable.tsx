@@ -14,6 +14,7 @@ import { useCustomQuery } from "@/hooks/useCustomQuery";
 import { getMyOrders } from "@/services/orders/getMyOrders";
 import TableSKeleton from "@/skeletons/TableSKeleton";
 import DetailsOrderModal from "./DetailsOrderModal";
+import NoData from "@/components/shared/NoData";
 
 const MyOrdersTable = ({ userId }: { userId: string }) => {
   const { data, isLoading, isError } = useCustomQuery({
@@ -45,7 +46,7 @@ const MyOrdersTable = ({ userId }: { userId: string }) => {
               data?.map((item, index) => (
                 <TableRow
                   className="hover:bg-gray-200 transition-all duration-300"
-                  key={index}
+                  key={index + 1}
                 >
                   <TableCell className="font-medium">{index + 1}</TableCell>
                   <TableCell>
@@ -76,7 +77,7 @@ const MyOrdersTable = ({ userId }: { userId: string }) => {
             ) : (
               <TableRow>
                 <TableCell colSpan={5} className="text-center">
-                  {/* <NoData message="No Categories Found" /> */}
+                  <NoData message="No Orders Found" />
                 </TableCell>
               </TableRow>
             )}

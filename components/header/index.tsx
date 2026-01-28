@@ -35,7 +35,7 @@ async function Header() {
 
         <div className="flex items-center justify-center gap-3">
           <div className="hidden lg:flex items-center justify-center gap-2">
-            <Link href={"/auth/login"}>
+            <Link href={"/reservation"}>
               <Button
                 className="py-0!  text-[13px]! font-semibold font-playfair italic"
                 variant={"outline"}
