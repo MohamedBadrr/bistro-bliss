@@ -40,11 +40,11 @@ const ReservationsTab = () => {
       isError={isError}
       isLoading={isLoading}
       lengthOfData={data?.length as number}
-      noDataMessage="No items for now, coming soon."
+      noDataMessage="No Reservations for now."
     >
       <div className=" mb-10 flex flex-col lg:flex-row max-md:gap-5 items-center justify-between w-full">
         <h1 className="text-[35px] font-playfair font-bold text-primary">
-          All Products
+          All Reservations
         </h1>
       </div>
       <div className="-mt-5!">

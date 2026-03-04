@@ -70,8 +70,8 @@ const UsersTab = () => {
         isLoading={isLoading}
         lengthOfData={data?.length as number}
       >
-        <div className="overflow-hidden rounded-lg my-5 border">
-          <Table className="" style={{ borderRadius: 5 }}>
+        <div className="overflow-x-auto rounded-lg my-5 border">
+          <Table className="w-full" style={{ borderRadius: 5 }}>
             <TableHeader className="p-8! bg-gray-200 font-semibold italic">
               <TableRow className="p-8!">
                 {/* <TableHead className="w-25">#</TableHead> */}
@@ -86,11 +86,11 @@ const UsersTab = () => {
               {filteredCategories.length > 0 ? (
                 filteredCategories?.map((user, index) => (
                   <TableRow
-                    className="hover:bg-gray-200 transition-all duration-300"
+                    className="w-full hover:bg-gray-200 transition-all duration-300"
                     key={index}
                   >
                     {/* <TableCell className="font-medium">{index + 1}</TableCell> */}
-                    <TableCell>
+                    <TableCell className="w-full whitespace-normal min-w-50">
                       <div className="space-x-2 flex items-center justify-start">
                         <Image
                           width={50}
@@ -102,7 +102,7 @@ const UsersTab = () => {
                         <p>{user.name}</p>
                       </div>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
+                    <TableCell className="whitespace-normal ">{user.email}</TableCell>
                     <TableCell>{user.country}</TableCell>
                     {/* <TableCell className=" ">
                       {item.products.length > 0 ? (
