@@ -1,13 +1,22 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { LocationEdit, Mail, Phone } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const ProvideHealthy = () => {
   return (
-    <div className="bg-neutral-50">
+    <div className="bg-neutral-50 overflow-hidden">
       <div className="container py-30 ">
         <div className="flex gap-20 flex-wrap items-start ">
-          <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
             <Image
               width={599}
               height={566}
@@ -37,9 +46,15 @@ const ProvideHealthy = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="gap-10 w-full max-w-85.25 flex items-start justify-start">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="gap-10 w-full max-w-85.25 flex items-start justify-start"
+          >
             <div className="flex items-center w-full flex-wrap justify-start gap-6">
               <h2 className="text-[35px] font-semi-bold font-playfair  ">
                 We provide healthy food for your family.
@@ -58,7 +73,7 @@ const ProvideHealthy = () => {
               </p>
               <Button variant={"outline"}>More About Us</Button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

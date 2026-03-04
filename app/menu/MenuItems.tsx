@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import MenuItem from "./MenuItem";
 import { getProducts } from "@/services/products/getProducts";
 import { QUERY_KEYS } from "@/constants/QueryKeies";
@@ -27,24 +28,45 @@ const MenuItems = () => {
         lengthOfData={filteredData?.length as number}
         noDataMessage="No items for now, coming soon."
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {filteredData?.map((item) => (
-            <MenuItem
-              description={item.description}
-              id={item.id}
-              image={item.image}
-              price={item.price}
+            <motion.div
               key={item.id}
-              created_at={item.created_at}
-              name={item.name}
-              product_extras={item.product_extras}
-              product_sizes={item.product_sizes}
-              category_id={item.category_id}
-              categories={item.categories}
-              updated_at={item.updated_at}
-            />
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
+              }}
+              transition={{ duration: 0.4 }}
+            >
+              <MenuItem
+                description={item.description}
+                id={item.id}
+                image={item.image}
+                price={item.price}
+                created_at={item.created_at}
+                name={item.name}
+                product_extras={item.product_extras}
+                product_sizes={item.product_sizes}
+                category_id={item.category_id}
+                categories={item.categories}
+                updated_at={item.updated_at}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </WithLoadingAndErrors>
     </>
   );

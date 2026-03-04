@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 const LittleCards = ({
   customersNumber,
@@ -62,20 +63,42 @@ const LittleCards = ({
   }, [started, customersNumber, foundedNumber, locationNumber, staffNumber]);
 
   return (
-    <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <motion.div
+      ref={cardsRef}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={{
+        hidden: { opacity: 0 },
+        show: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.2
+          }
+        }
+      }}
+      className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+    >
       <Card value={numbers.locations} label="Locations" />
       <Card value={numbers.founded} label="Founded" />
       <Card value={`${numbers.staff.toString()}+`} label="Staff Members" />
       <Card value={`${numbers.customers}%`} label="Satisfied Customers" />
-    </div>
+    </motion.div>
   );
 };
 
 const Card = ({ value, label }: { value: number | string; label: string }) => (
-  <div className="hover-scale hover:bg-neutral-100 w-full md:max-w-73.25 h-42.5 flex flex-col items-center justify-center gap-2 border border-neutral-200 rounded-md shadow-lg">
+  <motion.div
+    variants={{
+      hidden: { opacity: 0, scale: 0.8 },
+      show: { opacity: 1, scale: 1 }
+    }}
+    transition={{ duration: 0.5 }}
+    className="hover-scale hover:bg-neutral-100 w-full md:max-w-73.25 h-42.5 flex flex-col items-center justify-center gap-2 border border-neutral-200 rounded-md shadow-lg"
+  >
     <h3 className="font-playfair text-[30px] font-semibold">{value}</h3>
     <p className="font-playfair font-semibold">{label}</p>
-  </div>
+  </motion.div>
 );
 
 export default LittleCards;

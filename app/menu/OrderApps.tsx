@@ -1,10 +1,19 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const OrderApps = () => {
   return (
-    <div className="bg-neutral-50">
+    <div className="bg-neutral-50 overflow-hidden">
       <div className="container py-10 md:py-25 flex flex-col md:flex-row gap-25">
-        <div className="w-full space-y-3 md:max-w-86.5">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="w-full space-y-3 md:max-w-86.5"
+        >
           <h2 className="font-playfair text-[45px]">
             You can order through apps
           </h2>
@@ -12,11 +21,29 @@ const OrderApps = () => {
             Lorem ipsum dolor sit amet consectetur adipiscing elit enim bibendum
             sed et aliquet aliquet risus tempor semper.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-3 gap-6">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          className="grid grid-cols-3 gap-6"
+        >
           {ICONS.map((icon, index) => (
-            <div
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
+              }}
               key={index}
               className="bg-white items-center justify-center flex py-3 px-5 hover-scale"
             >
@@ -27,9 +54,9 @@ const OrderApps = () => {
                 width={151}
                 height={25}
               />
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

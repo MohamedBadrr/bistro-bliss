@@ -29,6 +29,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "formik": "^2.4.9",
+    "framer-motion": "^12.34.5",
     "lucide-react": "^0.561.0",
     "next": "16.0.10",
     "next-auth": "^5.0.0-beta.30",

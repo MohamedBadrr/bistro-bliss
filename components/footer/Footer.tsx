@@ -1,10 +1,19 @@
-import { Facebook, Instagram, Phone, Twitter  } from "lucide-react";
+"use client";
+
+import { Facebook, Instagram, Phone, Twitter } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <div className="bg-[#474747]">
-      <div className="container pt-20 pb-10 flex flex-col gap-5">
+    <div className="bg-[#474747] overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="container pt-20 pb-10 flex flex-col gap-5"
+      >
         <div className="flex justify-between flex-col gap-5 md:gap-0 md:flex-row ">
           <div className=" flex flex-col gap-6 w-full max-w-73.25">
             <div className="flex gap-5 flex-warp items-center justify-center">
@@ -104,7 +113,7 @@ const Footer = () => {
             Copyright © 2023 Hashtag Developer. All Rights Reserved
           </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

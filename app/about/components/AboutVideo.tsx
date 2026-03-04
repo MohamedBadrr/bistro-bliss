@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const AboutVideo = () => {
   const [isPaused, setIsPaused] = useState(true);
@@ -56,8 +57,28 @@ const AboutVideo = () => {
           </div>
         )}
       </div>
-      <div className="container py-20 flex flex-col md:flex-row gap-20">
-        <div className="flex gap-6 ">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={{
+          hidden: { opacity: 0 },
+          show: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.2
+            }
+          }
+        }}
+        className="container py-20 flex flex-col md:flex-row gap-20"
+      >
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            show: { opacity: 1, y: 0 }
+          }}
+          className="flex gap-6 "
+        >
           <Image
             src={"/assets/icons/easyIcon.png"}
             alt="Multi Icon"
@@ -72,9 +93,15 @@ const AboutVideo = () => {
               life.
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex gap-6">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            show: { opacity: 1, y: 0 }
+          }}
+          className="flex gap-6"
+        >
           <Image
             src={"/assets/icons/multiIcon.png"}
             alt="Easy Icon"
@@ -89,9 +116,15 @@ const AboutVideo = () => {
               life.
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex gap-6">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 30 },
+            show: { opacity: 1, y: 0 }
+          }}
+          className="flex gap-6"
+        >
           <Image
             src={"/assets/icons/fast.png"}
             alt="Easy Icon"
@@ -106,8 +139,8 @@ const AboutVideo = () => {
               life.
             </p>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 };

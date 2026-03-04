@@ -1,5 +1,5 @@
 "use client";
-
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ContactUsValidationSchema } from "@/validations";
 import { Form, Formik } from "formik";
@@ -17,7 +17,7 @@ const ContactForm = () => {
     name: string;
     subject: string;
     message: string;
-  }) => {};
+  }) => { };
   return (
     <Formik
       initialValues={initialValues}
@@ -28,7 +28,13 @@ const ContactForm = () => {
     >
       {({ isValid }) => (
         <Form className="w-full items-center justify-center flex ">
-          <div className="flex gap-7 items-center p-10 rounded-lg bg-white border border-neutral-200 justify-center max-w-179.25 w-full flex-col">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 30 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="flex gap-7 items-center p-10 rounded-lg bg-white border border-neutral-200 justify-center max-w-179.25 w-full flex-col"
+          >
             <div className="flex gap-6 w-full item-center ">
               <InputField
                 label="Name"
@@ -61,7 +67,7 @@ const ContactForm = () => {
             >
               Send
             </Button>
-          </div>
+          </motion.div>
         </Form>
       )}
     </Formik>
