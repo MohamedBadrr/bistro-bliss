@@ -10,6 +10,12 @@ Database: Supabase (PostgreSQL)
 Authentication: NextAuth v5
 Deployment Ready: Yes
 
+Admin Account :
+email : admin@admin.com 
+password: password123
+
+User Account : you can register new account.
+ىخقشةشم 
 🗂️ Pages & Features Summary
 Page	Route	Access
 Home	/	Public
@@ -309,6 +315,3 @@ Secure password hashing	✅
 Cloud image storage (Cloudinary)	✅
 Report generated: March 2026 | Project: Bistro Bliss Restaurant Web Application
 
-
-Comment
-Ctrl+Alt+M
