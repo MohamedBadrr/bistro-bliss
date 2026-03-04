@@ -15,7 +15,7 @@ email : admin@admin.com
 password: password123
 
 User Account : you can register new account.
-ىخقشةشم 
+ 
 🗂️ Pages & Features Summary
 Page	Route	Access
 Home	/	Public
