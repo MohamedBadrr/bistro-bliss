@@ -56,8 +56,9 @@ const AddToCardButton = (item: Product) => {
       <DialogTrigger asChild className="">
         <Button
           className="rounded-full w-full! my-2
-      hover:bg-white/90 hover:text-primary
-      group-hover:bg-white group-hover:text-primary "
+      hover:bg-primary/90 hover:text-white transition-colors duration-300
+      hover:border-white hover:border-[1px]
+        "
           size="sm"
         >
           Add Dish
@@ -84,8 +85,8 @@ const AddToCardButton = (item: Product) => {
                 <Divider />
 
                 <PickSize itemPrice={item.price} sizes={item.product_sizes} />
-                <Divider />
-                <Extras extras={item.product_extras} />
+
+                {item.product_extras.length > 0 && (<><Divider /><Extras extras={item.product_extras} /></>)}
               </div>
               <DialogFooter className="flex flex-col">
                 <Button
@@ -96,11 +97,11 @@ const AddToCardButton = (item: Product) => {
                   Add Dish To Basket{" "}
                   {formatCurrency(
                     item.price +
-                      (values.size?.price ?? 0) +
-                      (values.extras?.reduce(
-                        (sum, extra) => sum + (extra.price ?? 0),
-                        0
-                      ) ?? 0)
+                    (values.size?.price ?? 0) +
+                    (values.extras?.reduce(
+                      (sum, extra) => sum + (extra.price ?? 0),
+                      0
+                    ) ?? 0)
                   )}
                 </Button>
               </DialogFooter>
