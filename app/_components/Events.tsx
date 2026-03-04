@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const Events = () => {
   return (
-    <div className=" container py-30 flex gap-15 flex-col ">
+    <div className=" container py-30 flex gap-15 flex-col  ">
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ const Events = () => {
             className="flex flex-col gap-7 hover:scale-105 transition-all duration-300 "
             key={event.title}
           >
-            <div>
+            <div className="my-4">
               <Image
                 src={event.imageSrc}
                 alt={`${event.title} image`}
