@@ -77,16 +77,17 @@ const AddToCardButton = (item: Product) => {
                   className="mb-2"
                 />
                 <DialogTitle>{item.name}</DialogTitle>
-                <DialogDescription className="text-center">
+                <DialogDescription className="text-center my-4">
                   {item.description}
                 </DialogDescription>
               </DialogHeader>
               <div className="">
-                <Divider />
+                {/* <Divider />
 
-                <PickSize itemPrice={item.price} sizes={item.product_sizes} />
+                <PickSize itemPrice={item.price} sizes={item.product_sizes} /> */}
 
-                {item.product_extras.length > 0 && (<><Divider /><Extras extras={item.product_extras} /></>)}
+                {item.product_sizes.length > 0 && (<div className="space-y-4"><Divider /><PickSize itemPrice={item.price} sizes={item.product_sizes} /></div>)}
+                {item.product_extras.length > 0 && (<div className="space-y-4"><Divider /><Extras extras={item.product_extras} /></div>)}
               </div>
               <DialogFooter className="flex flex-col">
                 <Button
