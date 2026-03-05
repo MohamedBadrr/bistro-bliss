@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import CheckoutForm from "./CheckoutForm";
 import { UserProfile } from "@/services/user/getMe";
 
-function CartItems({ profile }: { profile: UserProfile }) {
+function CartItems({ profile }: { profile?: UserProfile }) {
   const deliveryFee = 5;
   const { cart, removeItemCart, updateQuantity } = useCart();
   const subTotal = getSubTotal(cart);
@@ -51,9 +51,8 @@ function CartItems({ profile }: { profile: UserProfile }) {
 
   return (
     <div
-      className={`${
-        cart.length > 0 ? "grid grid-cols-1 lg:grid-cols-2 gap-10" : ""
-      }`}
+      className={`${cart.length > 0 ? "grid grid-cols-1 lg:grid-cols-2 gap-10" : ""
+        }`}
     >
       <div className="">
         {cart && cart.length > 0 ? (

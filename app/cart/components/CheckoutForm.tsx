@@ -15,7 +15,7 @@ import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-function CheckoutForm({ profile }: { profile: UserProfile }) {
+function CheckoutForm({ profile }: { profile?: UserProfile }) {
   const { cart, clearCart } = useCart();
   const queryClient = useQueryClient();
   const initialValues = {
@@ -61,8 +61,8 @@ function CheckoutForm({ profile }: { profile: UserProfile }) {
             phone: values.phone,
             postal_code: values.postalCode,
             street_address: values.address,
-            user_email: profile.email,
-            user_id: profile.id,
+            user_id: profile?.id ?? null,
+            user_email: profile?.email ?? values.email ?? "",
           });
         }}
         validationSchema={checkoutValidationSchema}

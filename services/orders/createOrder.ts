@@ -2,8 +2,8 @@ import { supabase } from "@/lib/supabaseClient";
 import { CartItem } from "@/store/cart.store";
 
 export type CreateOrderInput = {
-  user_id: string;
-  user_email: string;
+  user_id: string | null;
+  user_email: string | null;
   phone: string;
   street_address: string;
   postal_code: string;
@@ -33,11 +33,11 @@ export const createOrder = async (input: CreateOrderInput): Promise<string> => {
   }));
 
   const { data, error } = await supabase.rpc("create_order_from_cart_v3", {
-    p_user_id: input.user_id,
+    p_user_id: input.user_id ? input.user_id : null,
     p_paid: false,
     p_total: total,
     p_status: "PENDING",
-    p_user_email: input.user_email,
+    p_user_email: input.user_email ?? "",
     p_phone: input.phone,
     p_street_address: input.street_address,
     p_postal_code: input.postal_code,

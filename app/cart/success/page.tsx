@@ -18,9 +18,9 @@ const SuccessPage = async ({
     <div className=" pt-25 h-screen">
       <div className="mb-5 ps-5 lg:ps-25 max-sm:pb-8"></div>
       <div className="flex  flex-col w-full items-center justify-center">
-        <div className="flex items-center justify-center gap-4 mb-8 container">
+        <div className="flex items-center justify-center flex-col md:flex-row gap-4 mb-0 md:mb-8 container">
           <BackButton />
-          <h1 className="text-5xl text-center font-semibold text-primary w-3/4 ">
+          <h1 className="text-2xl md:text-5xl text-center font-semibold text-primary w-full lg:w-3/4 ">
             {message}
           </h1>
         </div>

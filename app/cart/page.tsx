@@ -8,7 +8,7 @@ import CartItems from "./components/CartItems";
 
 const Page = async () => {
   const profile = await getMe();
-  if (!profile) return;
+  // if (!profile) return;
   return (
     <main>
       <section className="pt-25 pb-5 min-h-screen">
@@ -17,7 +17,7 @@ const Page = async () => {
             Shopping Cart
           </h2>
 
-          <CartItems profile={profile} />
+          <CartItems profile={profile ?? undefined} />
         </div>
       </section>
     </main>
