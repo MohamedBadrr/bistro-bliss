@@ -61,7 +61,7 @@ const AddToCardButton = (item: Product) => {
         "
           size="sm"
         >
-          Add Dish
+          Add Item
         </Button>
       </DialogTrigger>
       <Formik initialValues={initialValues} onSubmit={handleAddToCart}>
@@ -95,7 +95,7 @@ const AddToCardButton = (item: Product) => {
                   size={"sm"}
                   className="rounded-full px-4 py-4 w-full"
                 >
-                  Add Dish To Basket{" "}
+                  Add Item To Basket{" "}
                   {formatCurrency(
                     item.price +
                     (values.size?.price ?? 0) +

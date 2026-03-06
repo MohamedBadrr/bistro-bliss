@@ -53,9 +53,9 @@ const AddUpdateProductForm = ({
     mutationFn: (values: ProductSizeFormValues | UpdateProductFormValues) =>
       isEdit
         ? updateProduct({
-            ...(values as UpdateProductFormValues),
-            id: productId,
-          })
+          ...(values as UpdateProductFormValues),
+          id: productId,
+        })
         : addProduct(values as AddProductFormValues),
     onError: (error) => toast.error(error.message ?? "Some thing went wrong."),
     onSuccess: () => {
@@ -192,7 +192,7 @@ const AddUpdateProductForm = ({
                     variant={"outline"}
                     type="reset"
                     className="w-1/2"
-                    isLoading={isPending}
+                    disabled={isPending}
                   >
                     Cancel
                   </Button>
