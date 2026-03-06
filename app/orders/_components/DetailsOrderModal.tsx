@@ -76,12 +76,19 @@ const DetailsOrderModal = ({
                         alt={orderProduct.products.name || "Product"}
                         width={80}
                         height={80}
-                        className="rounded-md object-cover"
+                        className="rounded-md object-cover w-1/2"
                       />
                     )}
                     <div className="flex-1">
-                      <h4 className="font-semibold text-lg">
+                      <h4 className="font-semibold ">
                         {orderProduct.products?.name || "Unknown Product"}
+                        <p className="font-bold text-lg">
+                          {formatCurrency(
+                            (orderProduct.selected_size?.price ||
+                              orderProduct.products?.price ||
+                              0) * orderProduct.quantity
+                          )}
+                        </p>
                       </h4>
                       <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
                         <span>Quantity: {orderProduct.quantity}</span>
@@ -113,13 +120,7 @@ const DetailsOrderModal = ({
                       )}
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-lg">
-                        {formatCurrency(
-                          (orderProduct.selected_size?.price ||
-                            orderProduct.products?.price ||
-                            0) * orderProduct.quantity
-                        )}
-                      </p>
+
                     </div>
                   </div>
                 ))}
