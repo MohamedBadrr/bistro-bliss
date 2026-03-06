@@ -1,3 +1,5 @@
+Figma Design : https://www.figma.com/design/3e0JbGinHBMQ6srRxHBHCW/Food---Website-Design--Community-?node-id=0-1&p=f&t=jJsPr7iKqC23IpC6-0
+
 🍽️ Bistro Bliss — Complete Project Guide
 Prepared for Presentation
 📌 Project Overview
@@ -286,7 +288,6 @@ Mobile	Single-column layout, slide-in drawer navigation
 Tablet	2-column grids, expanded layout
 Desktop	Full navigation bar, multi-column grids, side-by-side layouts
 🎨 Brand & Design
-Primary Color: Deep Red (#AD343E) — used for buttons, headings, links, and accents
 Typography: Playfair Display (headings, brand name) + Roboto (body text)
 Micro-animations: Hover scale effects, fade-in-up on scroll, staggered children animations
 Loading States: Skeleton screens instead of spinners for perceived performance
@@ -314,4 +315,5 @@ SEO-optimized page titles & descriptions	✅
 Secure password hashing	✅
 Cloud image storage (Cloudinary)	✅
 Report generated: March 2026 | Project: Bistro Bliss Restaurant Web Application
+
 
