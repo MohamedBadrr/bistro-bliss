@@ -50,44 +50,42 @@ const OrdersTab = () => {
           lengthOfData={data?.length || 0}
           noDataMessage="No orders found."
         >
-          <div className="overflow-hidden rounded-lg my-5 border">
-            <Table className="" style={{ borderRadius: 5 }}>
-              <TableHeader className="p-8! bg-gray-200 font-semibold italic">
-                <TableRow className="p-8!">
-                  <TableHead className="w-25">#</TableHead>
-                  <TableHead>OrderID</TableHead>
+          <div className="my-5">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[60px]">#</TableHead>
+                  <TableHead>Order ID</TableHead>
                   <TableHead>Number of Products</TableHead>
-                  <TableHead className=" ">Total</TableHead>
-                  <TableHead className=" text-right">Details</TableHead>
+                  <TableHead>Total</TableHead>
+                  <TableHead className="text-right">Details</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredOrders?.length ?? 0 > 0 ? (
                   filteredOrders?.map((item, index) => (
-                    <TableRow
-                      className="hover:bg-gray-200 transition-all duration-300"
-                      key={index}
-                    >
+                    <TableRow key={index}>
                       <TableCell className="font-medium">{index + 1}</TableCell>
                       <TableCell>
-                        <div className="space-y-2 ">
-                          <p>{item.id}</p>
-                        </div>
+                        <p className="font-medium text-foreground">
+                          {item.id}
+                        </p>
                       </TableCell>
-                      {/* <TableCell>{item.products.length}</TableCell> */}
-                      <TableCell className=" ">
+                      <TableCell>
                         {item.order_products.length > 0 ? (
                           <p>{item.order_products.length}</p>
                         ) : (
-                          <span>No products found</span>
+                          <span className="text-muted-foreground">
+                            No products found
+                          </span>
                         )}
                       </TableCell>
                       <TableCell>
-                        <div className="space-y-2 ">
-                          <p className="">{item.total}</p>
-                        </div>
+                        <p className="font-semibold text-foreground">
+                          {item.total}
+                        </p>
                       </TableCell>
-                      <TableCell className=" ">
+                      <TableCell>
                         <div className="flex items-center justify-end gap-2">
                           <DetailsOrderModal OrderItem={item} />
                         </div>
@@ -96,8 +94,8 @@ const OrdersTab = () => {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center">
-                      {/* <NoData message="No Categories Found" /> */}
+                    <TableCell colSpan={5} className="text-center text-muted-foreground">
+                      No orders found.
                     </TableCell>
                   </TableRow>
                 )}

@@ -54,39 +54,34 @@ const ReservationsTab = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <div className="overflow-hidden rounded-lg my-5 border">
-        <Table className="" style={{ borderRadius: 5 }}>
-          <TableHeader className="p-8! bg-gray-200 font-semibold italic">
-            <TableRow className="p-8!">
-              <TableHead className="w-[100px]">#</TableHead>
+      <div className="my-5">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[60px]">#</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Phone</TableHead>
-              <TableHead className=" ">Date</TableHead>
-              <TableHead className=" ">Time</TableHead>
-              <TableHead className=" text-right">Total Persons</TableHead>
-              <TableHead className=" text-right">Created At</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>Time</TableHead>
+              <TableHead className="text-right">Total Persons</TableHead>
+              <TableHead className="text-right">Created At</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredCategories.length > 0 ? (
               filteredCategories.map((reservation, index) => (
-                <TableRow
-                  key={reservation.id}
-                  className="hover:bg-gray-200 transition-all duration-300"
-                >
+                <TableRow key={reservation.id}>
                   <TableCell className="font-medium">{index + 1}</TableCell>
                   <TableCell>{reservation.name}</TableCell>
-                  <TableCell className=" ">{reservation.phone}</TableCell>
-                  <TableCell className=" ">
-                    {reservation.reservation_date}
-                  </TableCell>
-                  <TableCell className=" ">
-                    {reservation.reservation_time}
-                  </TableCell>
-                  <TableCell className=" ">
+                  <TableCell>{reservation.phone}</TableCell>
+                  <TableCell>{reservation.reservation_date}</TableCell>
+                  <TableCell>{reservation.reservation_time}</TableCell>
+                  <TableCell className="text-right">
                     {reservation.total_persons}
                   </TableCell>
-                  <TableCell className=" ">{reservation.created_at}</TableCell>
+                  <TableCell className="text-right">
+                    {reservation.created_at}
+                  </TableCell>
                 </TableRow>
               ))
             ) : (

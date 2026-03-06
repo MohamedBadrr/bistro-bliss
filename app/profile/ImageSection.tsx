@@ -10,7 +10,7 @@ type Props = {
 
 const ImageSection = ({ userImage, onFileSelected }: Props) => {
   const [selectedImage, setSelectedImage] = useState(
-    userImage || "/assets/profileIamge.png"
+    userImage || "/assets/profileIamge.png",
   );
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +36,8 @@ const ImageSection = ({ userImage, onFileSelected }: Props) => {
         unoptimized={isBlob}
       />
 
-      <div className="absolute inset-0 hidden group-hover:flex items-center justify-center bg-black/40">
+      <div className="absolute inset-0 flex lg:hidden group-hover:flex items-center justify-center bg-black/40">
+        {" "}
         <input
           type="file"
           accept="image/*"

@@ -76,7 +76,7 @@ const DetailsOrderModal = ({
                         alt={orderProduct.products.name || "Product"}
                         width={80}
                         height={80}
-                        className="rounded-md object-cover w-1/2"
+                        className="rounded-md w-18! h-18! lg:w-25! lg:h-25! object-cover "
                       />
                     )}
                     <div className="flex-1">
@@ -86,7 +86,7 @@ const DetailsOrderModal = ({
                           {formatCurrency(
                             (orderProduct.selected_size?.price ||
                               orderProduct.products?.price ||
-                              0) * orderProduct.quantity
+                              0) * orderProduct.quantity,
                           )}
                         </p>
                       </h4>
@@ -119,9 +119,7 @@ const DetailsOrderModal = ({
                         </div>
                       )}
                     </div>
-                    <div className="text-right">
-
-                    </div>
+                    <div className="text-right"></div>
                   </div>
                 ))}
               </div>

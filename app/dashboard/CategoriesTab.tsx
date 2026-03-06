@@ -53,48 +53,49 @@ const CategoriesTab = () => {
         isLoading={isLoading}
         lengthOfData={data?.length as number}
       >
-        <div className="overflow-hidden rounded-lg my-5 border">
-          <Table className="" style={{ borderRadius: 5 }}>
-            <TableHeader className="p-8! bg-gray-200 font-semibold italic">
-              <TableRow className="p-8!">
-                <TableHead className="w-25">#</TableHead>
+        <div className="my-5">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[60px]">#</TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>Number of Products</TableHead>
-                <TableHead className=" ">Products</TableHead>
-                <TableHead className=" text-right">Actions</TableHead>
+                <TableHead>Products</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredCategories.length > 0 ? (
                 filteredCategories?.map((item, index) => (
-                  <TableRow
-                    className="hover:bg-gray-200 transition-all duration-300"
-                    key={item.id}
-                  >
+                  <TableRow key={item.id}>
                     <TableCell className="font-medium">{index + 1}</TableCell>
                     <TableCell>
-                      <div className="space-y-2 ">
-                        <p>{item.name}</p>
+                      <div className="space-y-1">
+                        <p className="font-medium text-foreground">
+                          {item.name}
+                        </p>
                       </div>
                     </TableCell>
                     <TableCell>{item.products.length}</TableCell>
-                    <TableCell className=" ">
+                    <TableCell>
                       {item.products.length > 0 ? (
                         item.products.map((product) => (
-                          <span key={product.id} className="me-2">
+                          <span key={product.id} className="me-2 text-muted-foreground">
                             {product.name},
                           </span>
                         ))
                       ) : (
-                        <span>No products found</span>
+                        <span className="text-muted-foreground">
+                          No products found
+                        </span>
                       )}
                     </TableCell>
-                    <TableCell className=" ">
+                    <TableCell>
                       <div className="flex items-center justify-end gap-2">
                         <AddUpdateCategoryModal
                           Children={
-                            <Button variant={"outline"} size={"icon"}>
-                              <Edit />
+                            <Button variant="outline" size="icon">
+                              <Edit className="w-4 h-4" />
                             </Button>
                           }
                           CategoryId={item.id}

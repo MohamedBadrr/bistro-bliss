@@ -70,64 +70,49 @@ const UsersTab = () => {
         isLoading={isLoading}
         lengthOfData={data?.length as number}
       >
-        <div className="overflow-x-auto rounded-lg my-5 border">
-          <Table className="w-full" style={{ borderRadius: 5 }}>
-            <TableHeader className="p-8! bg-gray-200 font-semibold italic">
-              <TableRow className="p-8!">
-                {/* <TableHead className="w-25">#</TableHead> */}
+        <div className="overflow-x-auto my-5">
+          <Table className="w-full">
+            <TableHeader>
+              <TableRow>
                 <TableHead>User</TableHead>
                 <TableHead>Email</TableHead>
-                <TableHead className=" ">Country</TableHead>
-                {/* <TableHead className="">Number of Orders</TableHead> */}
-                <TableHead className="">Admin</TableHead>
+                <TableHead>Country</TableHead>
+                <TableHead>Admin</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredCategories.length > 0 ? (
                 filteredCategories?.map((user, index) => (
-                  <TableRow
-                    className="w-full hover:bg-gray-200 transition-all duration-300"
-                    key={index}
-                  >
-                    {/* <TableCell className="font-medium">{index + 1}</TableCell> */}
-                    <TableCell className="w-full whitespace-normal min-w-50">
-                      <div className="space-x-2 flex items-center justify-start">
+                  <TableRow className="w-full" key={index}>
+                    <TableCell className="w-full whitespace-normal min-w-[200px]">
+                      <div className="flex items-center gap-3">
                         <Image
                           width={50}
                           height={50}
-                          className="rounded-full w-12.5! h-12.5! "
+                          className="rounded-full object-cover"
                           src={user.image ?? "/assets/profileIamge.png"}
                           alt={user.name}
                         />
-                        <p>{user.name}</p>
+                        <p className="font-medium text-foreground">
+                          {user.name}
+                        </p>
                       </div>
                     </TableCell>
-                    <TableCell className="whitespace-normal ">{user.email}</TableCell>
+                    <TableCell className="whitespace-normal">
+                      {user.email}
+                    </TableCell>
                     <TableCell>{user.country}</TableCell>
-                    {/* <TableCell className=" ">
-                      {item.products.length > 0 ? (
-                        item.products.map((product) => (
-                          <span key={product.id} className="me-2">
-                            {product.name},
-                          </span>
-                        ))
-                      ) : (
-                        <span>No products found</span>
-                      )} 
-                    </TableCell>*/}
-                    <TableCell className=" ">
-                      <div className="flex items-center justify.between ">
-                        <div className="flex items-center ">
-                          <Checkbox
-                            checked={user.role === "ADMIN"}
-                            onCheckedChange={() =>
-                              mutate({
-                                currentRole: user.role,
-                                userId: user.id,
-                              })
-                            }
-                          />
-                        </div>
+                    <TableCell>
+                      <div className="flex items-center">
+                        <Checkbox
+                          checked={user.role === "ADMIN"}
+                          onCheckedChange={() =>
+                            mutate({
+                              currentRole: user.role,
+                              userId: user.id,
+                            })
+                          }
+                        />
                       </div>
                     </TableCell>
                   </TableRow>
