@@ -34,7 +34,7 @@ const Dashboard = async () => {
   return (
     <main className="pt-22 container min-h-screen">
       <div className="w-full flex items-center justify-center">
-        <h1 className="text-[44px] font-bold italic text-primary -mb-5 max-sm:mt-7 lg:mb-10">
+        <h1 className="text-[44px] font-bold italic text-primary -mb-5 max-sm:-mt-4 lg:mb-10">
           Dashboard
         </h1>
       </div>
