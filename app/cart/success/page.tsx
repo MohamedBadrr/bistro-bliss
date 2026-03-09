@@ -4,7 +4,7 @@ import BackButton from "./BackButton";
 export const metadata = {
   title: "Bistro Bliss | Order Success",
   description:
-    "Your order was placed successfully. Thank you for choosing Bistro Bliss!",
+    "Your Order Placed Successfully. Thank you for choosing Bistro Bliss!",
 };
 
 const SuccessPage = async ({
@@ -16,8 +16,7 @@ const SuccessPage = async ({
   const message = params?.message;
   return (
     <div className=" pt-25 h-screen">
-      <div className="mb-5 ps-5 lg:ps-25 max-sm:pb-8"></div>
-      <div className="flex  flex-col w-full items-center justify-center">
+      <div className="flex  flex-col w-full items-center justify-start">
         <div className="flex items-center justify-center flex-col md:flex-row gap-4 mb-0 md:mb-8 container">
           <BackButton />
           <h1 className="text-2xl md:text-5xl text-center font-semibold text-primary w-full lg:w-3/4 ">

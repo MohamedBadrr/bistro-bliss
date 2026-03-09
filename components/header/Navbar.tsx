@@ -29,8 +29,8 @@ const Navbar = ({ closeOnNavigate = false, profile, session }: NavbarProps) => {
           hidden: { opacity: 0 },
           show: {
             opacity: 1,
-            transition: { staggerChildren: 0.1 }
-          }
+            transition: { staggerChildren: 0.1 },
+          },
         }}
         className="fixed flex-col top-10! md:top-0 lg:static px-10 py-20 lg:p-0 flex gap-10 bg-background lg:bg-transparent transition-all duration-200 lg:flex-row w-full lg:w-auto items-start lg:items-center"
       >
@@ -41,7 +41,7 @@ const Navbar = ({ closeOnNavigate = false, profile, session }: NavbarProps) => {
               key={index}
               variants={{
                 hidden: { opacity: 0, y: -10 },
-                show: { opacity: 1, y: 0 }
+                show: { opacity: 1, y: 0 },
               }}
             >
               <Wrap>
@@ -51,8 +51,9 @@ const Navbar = ({ closeOnNavigate = false, profile, session }: NavbarProps) => {
                 >
                   {link.title}
                   <span
-                    className={`absolute left-0 -bottom-1 h-0.5 bg-primary transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"
-                      }`}
+                    className={`absolute left-0 -bottom-1 h-0.5 bg-primary transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
                   />
                 </Link>
               </Wrap>
@@ -63,7 +64,7 @@ const Navbar = ({ closeOnNavigate = false, profile, session }: NavbarProps) => {
           <motion.li
             variants={{
               hidden: { opacity: 0, y: -10 },
-              show: { opacity: 1, y: 0 }
+              show: { opacity: 1, y: 0 },
             }}
           >
             <Link
@@ -72,10 +73,11 @@ const Navbar = ({ closeOnNavigate = false, profile, session }: NavbarProps) => {
             >
               {"Dashboard"}
               <span
-                className={`absolute left-0 -bottom-1 h-0.5 bg-primary transition-all duration-300 ${pathname.includes("/dashboard")
-                  ? "w-full"
-                  : "w-0 group-hover:w-full"
-                  }`}
+                className={`absolute left-0 -bottom-1 h-0.5 bg-primary transition-all duration-300 ${
+                  pathname.includes("/dashboard")
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
+                }`}
               />
             </Link>
           </motion.li>

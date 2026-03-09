@@ -36,7 +36,7 @@ function CheckoutForm({ profile }: { profile?: UserProfile }) {
     onSuccess: () => {
       toast.success("Order make done");
       router.push(
-        "/cart/success?message=Your order was placed successfully. Thank you for choosing Bistro Bliss!"
+        "/cart/success?message=Your Order Placed Successfully. Thank you for choosing Bistro Bliss!",
       );
       clearCart();
       queryClient.invalidateQueries({

@@ -49,7 +49,7 @@ const AddToCardButton = (item: Product) => {
   const handleAddToCart = (item: AddToCartFormValues) => {
     addToCart(item);
     setOpenDialog(false);
-    toast.success("Dish added to your Cart.");
+    toast.success("Item added to your Cart.");
   };
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -86,8 +86,21 @@ const AddToCardButton = (item: Product) => {
 
                 <PickSize itemPrice={item.price} sizes={item.product_sizes} /> */}
 
-                {item.product_sizes.length > 0 && (<div className="space-y-4"><Divider /><PickSize itemPrice={item.price} sizes={item.product_sizes} /></div>)}
-                {item.product_extras.length > 0 && (<div className="space-y-4"><Divider /><Extras extras={item.product_extras} /></div>)}
+                {item.product_sizes.length > 0 && (
+                  <div className="space-y-4">
+                    <Divider />
+                    <PickSize
+                      itemPrice={item.price}
+                      sizes={item.product_sizes}
+                    />
+                  </div>
+                )}
+                {item.product_extras.length > 0 && (
+                  <div className="space-y-4">
+                    <Divider />
+                    <Extras extras={item.product_extras} />
+                  </div>
+                )}
               </div>
               <DialogFooter className="flex flex-col">
                 <Button
@@ -98,11 +111,11 @@ const AddToCardButton = (item: Product) => {
                   Add Item To Basket{" "}
                   {formatCurrency(
                     item.price +
-                    (values.size?.price ?? 0) +
-                    (values.extras?.reduce(
-                      (sum, extra) => sum + (extra.price ?? 0),
-                      0
-                    ) ?? 0)
+                      (values.size?.price ?? 0) +
+                      (values.extras?.reduce(
+                        (sum, extra) => sum + (extra.price ?? 0),
+                        0,
+                      ) ?? 0),
                   )}
                 </Button>
               </DialogFooter>
